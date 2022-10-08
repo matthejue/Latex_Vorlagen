@@ -1,0 +1,22 @@
+%!Tex Root = ../Vorlage_Praesentation.tex
+% ./content_Praesentation/Kapitel2.tex
+
+\if\hide1\section{Kapitel 1}\fi
+
+\begin{frame}[label={kapitel1]{Kapitel 1}{Beispiel für Tabelle}
+  \scriptsize
+  \begin{table}[H]
+    \center
+    \begin{NiceTabular}{X[1,c]X[2,l]}[rules/color=PrimaryColor] % {\linewidth}{|C|C|L|L|}
+      \CodeBefore
+      \chessboardcolors{white}{BoxColor}
+      \rowcolor{PrimaryColor}{1}
+      \Body
+      \textcolor{white}{Spalte 1} & \textcolor{white}{Spalte 2} \\
+      \scripttt{row1} & \alert{Beschreibung} für \scripttt{row1}. \\
+      \scripttt{row2} & \Alert{Beschreibung} für \scripttt{row2}. \\
+      \bottomrule
+    \end{NiceTabular}
+    \caption{Beispiel.}
+  \end{table}
+\end{frame}
