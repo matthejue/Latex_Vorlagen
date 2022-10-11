@@ -1,3 +1,9 @@
+%!Tex Root = ../Vorlage_Praesentation.tex
+% ./Packete.tex
+% ./Deklarationen.tex
+% ./Kapitel1.tex
+% ./Kapitel2.tex
+
 % ┌──────────────────────┐
 % │ Beamer Configuration │
 % └──────────────────────┘
@@ -58,61 +64,64 @@
 % │ Titlepage Configuration │
 % └─────────────────────────┘
 
+\newcommand{\titlesecond}{Titel der Präsentation}
+\newcommand{\subtitlesecond}{Untertitel der Präsentation}
+\newcommand{\type}{
+  Art der Präsentation\\[-0.25cm]
+  \rule{8cm}{0.1mm}
+}
+\newcommand{\authorsecond}{Autor der Präsentation}
 \newcommand{\moreinformation}{
 \begin{columns}
 \begin{column}{0.5\textwidth}
   \raggedright
   \small
-  \emph{Gutachter:}
+  \emph{Weitere Aufgabe:}
 
-  Prof. Dr. Scholl
+  Weitere Person
 \end{column}
 \begin{column}{0.5\textwidth}
   \raggedleft
   \small
-  \emph{Betreuung:}
+  \emph{Weitere Aufgabe:}
 
-  M.Sc. Seufert
+  Weitere Person
 \end{column}
 \end{columns}
 }
+\newcommand{\institutesecond}{Name des Instituts}
+\newcommand{\datesecond}{\today}
+% \logo{\includegraphics[height=0.5cm]{./figures/logo.png}}
 
-\newcommand{\kolloquium}{
-  Kolloquiumspräsentation\\[-0.25cm]
-  \rule{8cm}{0.1mm}
-}
+\newcommand{\lehrstuhl}{Lehrstuhl für X}
 
-\newcommand{\lehrstuhl}{Lehrstuhl für Betriebssysteme}
-
-\defbeamertemplate*{title page2}{default}[1][]
-{
+\defbeamertemplate*{title page2}{default}[1][]{
   \vbox{}
   \vfill
   \begingroup
     \centering
     \begin{beamercolorbox}[sep=8pt,center,#1]{title}
-      \usebeamerfont{title}\inserttitle\par%
-      \ifx\insertsubtitle\@empty%
+      \usebeamerfont{title}\titlesecond\par%
+      \ifx\subtitlesecond\@empty%
       \else%
         \vskip0.25em%
-        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\subtitlesecond\par}%
       \fi%
     \end{beamercolorbox}%
     \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
-       \kolloquium
+       \type
     \end{beamercolorbox}
     \begin{beamercolorbox}[sep=8pt,center,#1]{author}
-      \usebeamerfont{author}\emph{Präsentator:}\\ \insertauthor
+      \usebeamerfont{author}\emph{Präsentator:}\\ \authorsecond
     \end{beamercolorbox}
     \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
       \moreinformation
     \end{beamercolorbox}\vskip1em
     \begin{beamercolorbox}[sep=8pt,center,#1]{date}
-      % \usebeamerfont{date}\emph{\insertdate}
-      \usebeamerfont{date}\emph{28. September 2022}
+      \usebeamerfont{date}\emph{\datesecond}
     \end{beamercolorbox}
     \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
-      \usebeamerfont{institute}\insertinstitute, \lehrstuhl
+      \usebeamerfont{institute}\institutesecond, \lehrstuhl
     \end{beamercolorbox}
     {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
   \endgroup
@@ -123,66 +132,11 @@
 \def\titlepagesecond{\usebeamertemplate*{title page2}\@thanks}
 \makeatother
 
-\defbeamertemplate*{title page3}{default}[1][]
-{
-  \vbox{}
-  \vfill
-  \begingroup
-    \centering
-    \begin{beamercolorbox}[sep=8pt,center,#1]{title}
-      \usebeamerfont{title}\inserttitle\par%
-      \ifx\insertsubtitle\@empty%
-      \else%
-        \vskip0.25em%
-        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-      \fi%
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
-       Dokumentation\\[-0.25cm]
-      \rule{7cm}{0.1mm}
-    \end{beamercolorbox}
-    \vskip0.7cm
-    \begin{beamercolorbox}[sep=8pt,center,#1]{author}
-      \usebeamerfont{institute}\emph{Bitte Korrekturen mitteilen über:}\\ \url{https://github.com/matthejue/Bachelorarbeit_Dokumentation_out/issues}
-    \end{beamercolorbox}
-    \vskip0.7cm
-    \begin{beamercolorbox}[sep=8pt,center,#1]{date}
-      \usebeamerfont{date}\emph{Aktualisiert am:}\\ \insertdate
-    \end{beamercolorbox}
-    \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
-      \usebeamerfont{institute}\insertinstitute, \lehrstuhl
-    \end{beamercolorbox}
-    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
-  \endgroup
-  \vfill
-}
-
-\makeatletter
-\def\titlepagethird{\usebeamertemplate*{title page3}\@thanks}
-\makeatother
-
-% ┌──────────────────────┐
-% │ Layout Configuration │
-% └──────────────────────┘
-
-\setbeamertemplate{blocks}[rounded][shadow=true]
 \setbeamertemplate{title page2}[default][colsep=-4bp,rounded=true,shadow=true]
-\setbeamertemplate{title page3}[default][colsep=-4bp,rounded=true,shadow=true]
 
-% https://tex.stackexchange.com/questions/578098/number-of-figure-in-beamer
-\setbeamertemplate{caption}[numbered]
-
-% \setbeamertemplate{itemize item}{\rightTextArrow}
-% \setbeamertemplate{itemize subitem}{\rightTextArrow}
-% \setbeamertemplate{itemize subsubitem}{\rightTextArrow}
-
-% \setbeamertemplate{sidebar canvas left}{}
-\setbeamersize{sidebar width right=1.5cm}
-\setbeamertemplate{sidebar right}{%
-  \vspace*{\fill}
-  \includegraphics[width=1.5cm]{./figures/background.png}
-  \vspace*{\fill}
-}
+% ┌───────────────────────┐
+% │ Footline and Headline │
+% └───────────────────────┘
 
 % https://github.com/josephwright/beamer/blob/main/base/themes/outer/beamerouterthemeinfolines.sty
 \makeatletter
@@ -190,18 +144,15 @@
   \leavevmode%
   \hbox{%
     \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-      \usebeamerfont{author in head/foot}\insertshortauthor % \expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+      \usebeamerfont{author in head/foot}\authorsecond % \expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-      % \usebeamerfont{title in head/foot}\insertshorttitle
-      \usebeamerfont{title in head/foot}\inserttitle
+      \usebeamerfont{title in head/foot}\titlesecond
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,leftskip=2ex,rightskip=2ex,sep=0pt]{date in head/foot}%
       \hfill%
-      % \usebeamerfont{date in head/foot}%
-      % \insertshortdate{}%
       \usebeamerfont{author in head/foot}%
-      \insertshortinstitute{}
+      \institutesecond
       \hfill%
       \usebeamercolor[fg]{page number in head/foot}%
       \usebeamerfont{page number in head/foot}%
@@ -222,7 +173,6 @@
   }
 }
 
-% super praktischer Tipp mit Environments
 % https://tex.stackexchange.com/questions/44983/beamer-removing-headline-and-its-space-on-a-single-frame-for-plan-but-keepin
 \newenvironment{withoutheadline}{
   \setbeamertemplate{headline}{%
@@ -244,21 +194,26 @@
   }
 }{}
 
-% ┌────────────────────┐
-% │ Font Configuration │
-% └────────────────────┘
+% ┌──────────────────────┐
+% │ Layout Configuration │
+% └──────────────────────┘
 
-\setbeamerfont{title}{size=\LARGE}
-\setbeamerfont{date}{size=\footnotesize}
-\setbeamerfont{author}{size=\small}
-\setbeamerfont{institute}{size=\small}
-\setbeamerfont{subtitle}{size=\large}
+\setbeamertemplate{blocks}[rounded][shadow=true]
 
-\setbeamerfont{frametitle}{size=\LARGE}
-\setbeamerfont{framesubtitle}{size=\large}
+% https://tex.stackexchange.com/questions/578098/number-of-figure-in-beamer
+\setbeamertemplate{caption}[numbered]
 
+% \setbeamertemplate{itemize item}{\rightTextArrow}
+% \setbeamertemplate{itemize subitem}{\rightTextArrow}
+% \setbeamertemplate{itemize subsubitem}{\rightTextArrow}
 
-\setbeamerfont{normal text}{size=\tiny}
+% \setbeamertemplate{sidebar canvas left}{}
+\setbeamersize{sidebar width right=1.5cm}
+\setbeamertemplate{sidebar right}{%
+  \vspace*{\fill}
+  \includegraphics[width=1.5cm]{./figures/background.png}
+  \vspace*{\fill}
+}
 
 \newcommand{\insertsectionHEAD}{%
 	\expandafter\insertsectionHEADaux\insertsectionhead}
@@ -282,11 +237,27 @@
   \endgroup
 }
 
-% \AtBeginSection[ ] {
-% \begin{frame}{Gliederung}
-  % \tableofcontents[currentsection]
-% \end{frame}
+% TOC at beginning of each section
+% \AtBeginSection[]{
+%   \begin{frame}{Gliederung}
+%     \tableofcontents[currentsection]
+%   \end{frame}
 % }
+
+% ┌────────────────────┐
+% │ Font Configuration │
+% └────────────────────┘
+
+\setbeamerfont{title}{size=\LARGE}
+\setbeamerfont{date}{size=\footnotesize}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{institute}{size=\small}
+\setbeamerfont{subtitle}{size=\large}
+
+\setbeamerfont{frametitle}{size=\LARGE}
+\setbeamerfont{framesubtitle}{size=\large}
+
+\setbeamerfont{normal text}{size=\tiny}
 
 % ┌───────────┐
 % │ Resources │

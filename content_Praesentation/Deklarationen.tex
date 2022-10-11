@@ -1,41 +1,58 @@
-%!Tex Root = ../Main.tex
-% ./content/Packete_und_Deklarationen.tex
-% ./content/Einführung.tex
-% ./content/Implementierung.tex
-% ./content/Implementierung2.tex
-% ./content/Implementierung3.tex
-% ./content/Vorführung.tex
-% ./content/Qualitätssicherung.tex
-% ./content/Appendix.tex
+%!Tex Root = ../Vorlage_Praesentation.tex
+% ./Packete.tex
+% ./Design.tex
+% ./Kapitel1.tex
+% ./Kapitel2.tex
 
-\newtcbinputlisting{\codebox}[2][]{
-  listing file={#2},
-  enhanced, colframe=PrimaryColor,colback=BoxColor, fonttitle=\small, arc=1mm, bottom=1mm, top=1mm, left=1mm, right=1mm, #1, listing only, listing engine=minted, minted style=colorful, halign title=center, drop fuzzy shadow,
-}
+% ┌──────────┐
+% │ Settings │
+% └──────────┘
 
-% minted options={fontsize=\tiny,linenos=false,breaklines,breakafter={_}, breakbefore={(}, breakaftersymbolpre={}, breakaftersymbolpost={}, breakbeforesymbolpre={}, breakbeforesymbolpost={}, breaksymbolsepleft=2mm, breaksymbolsepright=0mm, breakindent=0mm, breaksymbolindentleft=5mm, breaksymbolindentright=0mm, numbersep=0mm, escapeinside=||}
+% https://tex.stackexchange.com/questions/584071/configure-minted-style-in-latex-for-code-highlighting
+% https://pygments.org/docs/tokens/
+% https://pygments.org/docs/styledevelopment/#creating-own-styles
+% 'custom':  'custom::CustomStyle' in /usr/lib/python3.10/site-packages/pygments/styles/__init__.py
+\usemintedstyle{custom}
 
-\newtcblisting{terminal}{
-enhanced, colframe=SecondaryColor, colback=BoxColor, hbox, fonttitle=\small, arc=1mm, bottom=1mm, top=1mm, left=1mm, right=1mm, listing only, listing engine=minted, halign title=center, drop fuzzy shadow, minted language=text, minted options={fontsize=\tiny,linenos=false,autogobble,breaklines,breakafter={_}, breakbefore={(}, breakaftersymbolpre={}, breakaftersymbolpost={}, breakbeforesymbolpre={}, breakbeforesymbolpost={}, breaksymbolsepleft=2mm, breaksymbolsepright=0mm, breakindent=0mm, breaksymbolindentleft=5mm, breaksymbolindentright=0mm, numbersep=0mm, escapeinside=||}
-}
-\newtcolorbox{Code_Frame}[2][]{enhanced, drop fuzzy shadow, arc=1mm, bottom=1mm, top=0mm, left=1mm, right=1mm, boxrule=1mm, halign title=center, fonttitle=\tiny, interior style={fill=white}, frame style={color=PrimaryColor}, title={#2}, #1}
+% https://tex.stackexchange.com/questions/345976/global-settings-for-minted
+\setminted{fontsize=\tiny,breaklines,highlightcolor=SecondaryColorDimmed,autogobble,escapeinside=||,breakafter={_},breakbefore={(},breakaftersymbolpre={},breakaftersymbolpost={},breakbeforesymbolpre={},breakbeforesymbolpost={},breaksymbolsepleft=2mm,breaksymbolsepright=0mm,breakindent=0mm,breaksymbolindentleft=5mm,breaksymbolindentright=0mm,numbersep=2.5mm}
+
+\newenvironment{linenums}{
+  \setminted{linenos}
+}{}
+
+\setlist[itemize]{itemsep=2mm, parsep=0mm, partopsep=0mm, topsep=0.25cm}
+
+% ┌─────────────────┐
+% │ Classical Boxes │
+% └─────────────────┘
+
+\DeclareTCBInputListing{\codebox}{ s o m }{listing file={#3},
+  enhanced,colframe=PrimaryColor,colback=BoxColor,IfBooleanTF={#1}{colframe=SecondaryColor}{colframe=PrimaryColor},fonttitle=\tiny,#2,listing only,halign title=center,drop fuzzy shadow,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,boxrule=0.5mm,listing engine=minted}
 % , sharpish corners
 
-% \newtcbinputlisting{codeframe}[2][]{
-%   listing file={#2},
-%   enhanced, colframe=PrimaryColor,colback=BoxColor, fonttitle=\tiny, arc=1mm, bottom=1mm, top=1mm, left=1mm, right=1mm, #1, listing only, listing engine=minted, minted style=colorful, halign title=center, drop fuzzy shadow,
-% }
-
-\DeclareTCBInputListing{\codeframe}{ s o m }{listing file={#3},
-enhanced,colback=BoxColor,IfBooleanTF={#1}{colframe=SecondaryColor}{colframe=PrimaryColor},fonttitle=\tiny,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,#2,listing only,listing engine=minted,minted style=colorful,halign title=center,drop fuzzy shadow}
-
-\newtcolorbox{File}[1][]{enhanced, hbox, drop fuzzy shadow, arc=1mm, bottom=1mm, top=1mm, left=1mm, right=1mm, notitle, interior style={fill=PrimaryColor}, frame empty, halign=center, fontupper=\color{white}\tiny, #1}
+% % https://tex.stackexchange.com/questions/585582/inside-of-a-newtcbinputlisting-how-can-i-change-the-color-of-the-line-number-as
+% % https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
+% https://tex.stackexchange.com/questions/132849/how-can-i-change-the-font-size-of-the-number-in-minted-environment
+\renewcommand{\theFancyVerbLine}{\ttfamily\textcolor{white}{\tiny{\arabic{FancyVerbLine}}}}
+% \renewcommand{\theFancyVerbLine}{\sffamily \textcolor[rgb]{0.5,0.5,1.0}{\huge \oldstylenums{\arabic{FancyVerbLine}}}}
 
 \newtcbinputlisting{\numberedcodebox}[2][]{
-listing file={#2},
-enhanced, colframe=PrimaryColor,colback=BoxColor, fonttitle=\small, arc=1mm, #1, listing only, listing engine=minted, minted style=colorful, halign title=center, drop fuzzy shadow, overlay={\begin{tcbclipinterior}\fill[PrimaryColor] (frame.south west) rectangle ([xshift=4mm]frame.north west);\end{tcbclipinterior}}
+  listing file={#2}, enhanced, colframe=PrimaryColor,colback=BoxColor, fonttitle=\small, #1, listing only, halign title=center,drop fuzzy shadow,arc=1mm,boxrule=0.5mm,listing engine=minted,overlay={\begin{tcbclipinterior}\fill[PrimaryColor] (frame.south west) rectangle ([xshift=4mm]frame.north west);\end{tcbclipinterior}}
 }
-% minted options={fontsize=\tiny,breaklines,autogobble,linenos,numbersep=3mm, highlightcolor=SecondaryColor,escapeinside=||}
+
+\DeclareTColorBox{codeframe}{ s o m }{
+  enhanced, halign title=center, fonttitle=\tiny, interior style={fill=white}, IfBooleanTF={#1}{frame style={color=SecondaryColor}}{frame style={color=PrimaryColor}}, title={#3}, #2,drop fuzzy shadow,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,boxrule=0.5mm,listing engine=minted,minted style=colorful}
+
+\newtcolorbox{file}[1][]{enhanced, hbox, notitle, interior style={fill=PrimaryColor}, frame empty, halign=center, fontupper=\color{white}\tiny, #1,drop fuzzy shadow,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,boxrule=0.5mm,listing engine=minted,minted style=colorful}
+
+\newtcblisting{terminal}{
+enhanced,colframe=PrimaryColor,colback=BoxColor,hbox,listing only,halign title=center,minted language=text,drop fuzzy shadow,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,boxrule=0.5mm,listing engine=minted,minted style=colorful,minted options={}}
+
+% % https://tex.stackexchange.com/questions/593218/nested-inline-math-for-new-command-with-argument
+\newcommand{\prompt}{\textcolor{SecondaryColor}{\setBold >\;\ignorespaces}}
+% % https://tex.stackexchange.com/questions/593218/nested-inline-math-for-new-command-with-argument
+\newcommand{\customprompt}{\textnormal\bfseries\textcolor{SecondaryColor}{S}\textcolor{gray!90!black}{he}\textcolor{SecondaryColorDimmed}{ll}\textcolor{SecondaryColor}{>}\;\ignorespaces}
 
 \DeclareTotalTCBox{\inlinebox}{ s v }
 {verbatim,colback=SecondaryColorDimmed,colframe=SecondaryColor}
@@ -46,3 +63,39 @@ enhanced, colframe=PrimaryColor,colback=BoxColor, fonttitle=\small, arc=1mm, #1,
 \DeclareTotalTCBox{\key}{ m }
 {verbatim,colback=SecondaryColorDimmed,colframe=SecondaryColor}
 {$\mathtt{#1}$}
+
+\numberwithin{equation}{section}
+
+% ┌──────────────┐
+% │ New Commands │
+% └──────────────┘
+
+% alternative alert
+\newcommand\aalert[1]{\textcolor{PrimaryColor}{#1}}
+
+\newcommand{\coloritem}{%
+\item[\textcolor{SecondaryColor}{$\blacktriangleright$}]\ignorespaces}
+
+\newcommand{\colorlabel[1]}{%
+\item[\textcolor{SecondaryColor}{$\blacktriangleright$}]\Alert{#1:}\enspace\ignorespaces}
+
+\newcommand{\greyitem}{%
+\item[\textcolor{gray!90!black}{$\blacktriangleright$}]\ignorespaces}
+
+% https://tex.stackexchange.com/questions/329990/how-do-i-change-the-color-of-itemize-bullet-specific-and-default
+% \renewcommand{\labelitemi}{$\textcolor{PrimaryColor}{\bullet}$}
+% \renewcommand{\labelitemii}{$\textcolor{PrimaryColor}{\cdot}$}
+% \renewcommand{\labelitemiii}{$\textcolor{PrimaryColor}{\diamond}$}
+% \renewcommand{\labelitemiv}{$\textcolor{PrimaryColor}{\ast}$}
+
+\newcommand{\notebook}{\hfill\includegraphics[height=3mm]{./figures/note.png}}
+
+\newcommand{\magnifier}{\hfill\includegraphics[height=3mm]{./figures/lupe.png}}
+
+\newcommand\RemoveMargin[2][3em]{%
+\makebox[\linewidth][c]{%
+  \begin{minipage}{\dimexpr\textwidth+#1\relax}
+  \raggedright#2
+  \end{minipage}%
+  }%
+}
