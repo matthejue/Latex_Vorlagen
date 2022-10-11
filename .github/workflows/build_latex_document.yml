@@ -20,7 +20,7 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.UPLOAD_TO_REPO }}
       with:
         source_file: 'Vorlage_Praesentation.log'
-        destination_repo: 'matthejue/Bachelorarbeit_Uebungsblatt_out'
+        destination_repo: 'matthejue/PicoC-Compiler_Uebungsblatt_out'
         destination_folder: ''
         user_email: 'matthejue@gmail.com'
         user_name: 'matthejue'
@@ -31,7 +31,7 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.UPLOAD_TO_REPO }}
       with:
         source_file: 'Vorlage_Praesentation.pdf'
-        destination_repo: 'matthejue/Bachelorarbeit_Uebungsblatt_out'
+        destination_repo: 'matthejue/PicoC-Compiler_Uebungsblatt_out'
         destination_folder: ''
         user_email: 'matthejue@gmail.com'
         user_name: 'matthejue'
