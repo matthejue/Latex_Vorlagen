@@ -16,7 +16,8 @@
 % └─────────────────────┘
 
 % % https://latexdraw.com/how-to-draw-venn-diagrams-in-latex/
-\usepackage{xcolor}
+% as beamer itself already provides these functionalities, there is no need to load hyperref, color, graphicx, graphics
+% \usepackage{xcolor}
 \definecolor{PrimaryColor}{HTML}{2a8892}
 \definecolor{PrimaryColorDimmed}{HTML}{a8dec5}
 \definecolor{SecondaryColor}{HTML}{e96e1a}
@@ -30,9 +31,10 @@
 \setbeamercolor{alerted text}{%
   fg=SecondaryColor,
 }
-\setbeamercolor{example text}{%
-  fg=SecondaryColor,
-}
+
+% \setbeamercolor{example text}{%
+%   fg=PrimaryColor,
+% }
 
 \setbeamercolor{structure}{fg=SecondaryColor}
 
@@ -55,10 +57,33 @@
 
 \setbeamercolor{block title}{fg=white, bg=PrimaryColor}
 \setbeamercolor{block body}{fg=black, bg=BoxColor}
+
 \setbeamercolor{block title example}{fg=white, bg=PrimaryColor}
 \setbeamercolor{block body example}{fg=black, bg=BoxColor}
-\setbeamercolor{block title alerted}{fg=white, bg=PrimaryColor}
+
+\setbeamercolor{block title alerted}{fg=white, bg=SecondaryColor}
 \setbeamercolor{block body alerted}{fg=black, bg=BoxColor}
+
+% https://tex.stackexchange.com/questions/326527/colored-blocks-for-numbered-theorems-in-beamer
+% https://tex.stackexchange.com/questions/87216/how-to-change-the-color-of-the-text-in-a-theorem-in-beamer/87219#87219
+\AtBeginEnvironment{theorem}{% set of commands to be added
+    \setbeamercolor{block title}{fg=white,bg=PrimaryColor}% colors to change
+    \setbeamercolor{block body}{fg=black,bg=PrimaryColorDimmed}% colors to change
+}
+
+\AtBeginEnvironment{proof}{%
+    \setbeamercolor{block title}{fg=white,bg=SecondaryColor}
+    \setbeamercolor{block body}{fg=black,bg=SecondaryColorDimmed}
+}
+
+% https://tex.stackexchange.com/questions/87133/changing-the-color-of-itemize-item-in-beamer
+\setbeamercolor{itemize item}{fg=SecondaryColor}
+\setbeamercolor{itemize subitem}{fg=SecondaryColor}
+\setbeamercolor{itemize subsubitem}{fg=SecondaryColor}
+
+\setbeamercolor{enumerate item}{fg=SecondaryColor}
+\setbeamercolor{enumerate subitem}{fg=SecondaryColor}
+\setbeamercolor{enumerate subsubitem}{fg=SecondaryColor}
 
 % ┌─────────────────────────┐
 % │ Titlepage Configuration │
@@ -203,10 +228,6 @@
 % https://tex.stackexchange.com/questions/578098/number-of-figure-in-beamer
 \setbeamertemplate{caption}[numbered]
 
-% \setbeamertemplate{itemize item}{\rightTextArrow}
-% \setbeamertemplate{itemize subitem}{\rightTextArrow}
-% \setbeamertemplate{itemize subsubitem}{\rightTextArrow}
-
 % \setbeamertemplate{sidebar canvas left}{}
 \setbeamersize{sidebar width right=1.5cm}
 \setbeamertemplate{sidebar right}{%
@@ -243,6 +264,12 @@
 %     \tableofcontents[currentsection]
 %   \end{frame}
 % }
+
+% https://tex.stackexchange.com/questions/87133/changing-the-color-of-itemize-item-in-beamer
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[triangle]
+\setbeamertemplate{itemize subsubitem}[triangle]
+% square, circle, triangle, \rightTextArrow
 
 % ┌────────────────────┐
 % │ Font Configuration │

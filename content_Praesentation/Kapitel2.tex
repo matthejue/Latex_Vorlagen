@@ -4,9 +4,9 @@
 % ./Deklarationen.tex
 % ./Kapitel1.tex
 
-\if\hide0\section{Kapitel 2}\fi
+\if\hide0\section{Kapitel 3}\fi
 
-\begin{frame}[fragile]{Kapitel 1}{Beispiele für Codeboxen}
+\begin{frame}[fragile, label={kapitel3}]{Kapitel 3}{Beispiele für Codeboxen}
   \begin{columns}
     \begin{column}{0.4\textwidth}
       \codebox[title=Codebeispiel, remember as=codebeispiel1, minted language=c, minted options={highlightlines={1,3-7}}]{./code_examples/example.c}
@@ -23,14 +23,26 @@
   \end{tikzpicture}
 \end{frame}
 
-\begin{frame}[fragile, label={kapitel2}]{Kapitel 2}{Beispiele für Inline Boxen}
+\begin{frame}[fragile]{Kapitel 3}{Beispiele für Inline Boxen}
+  \begin{itemize}
+      \item \inlinebox{arg} aus \inlinebox*{command arg}.
+      \item \key{\Uparrow-Tab}.
+      \item longline longline longline longline longline longline longline longline longline longline longline longline.
+    \end{itemize}
     \begin{itemize}
-      \coloritem \inlinebox{arg} aus \inlinebox*{command arg}.
-      \coloritem \key{\Uparrow-Tab}.
+      \item longline longline longline longline longline longline longline longline longline longline longline longline.
+      \grayitem \textcolor{gray!90!black}{test test test.}
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Kapitel 2}{Beispiel für hierarchisch aufgebaute Codebeispiele}
+\begin{frame}{Kapitel 3}{Beispiele Listen und Nummerierung}
+  \begin{enumerate}
+    \item asdf
+    \item asdf
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Kapitel 3}{Beispiel für hierarchisch aufgebaute Codebeispiele}
   \centering
   \begin{file}[remember as=input]
     Start
@@ -51,7 +63,7 @@
   \end{tikzpicture}
 \end{frame}
 
-\begin{frame}[fragile]{Kapitel 2}{Beispiel für Terminal}
+\begin{frame}[fragile]{Kapitel 3}{Beispiel für Terminal}
   \centering
   \begin{terminal}
     |\prompt| command arg

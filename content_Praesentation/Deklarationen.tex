@@ -12,6 +12,7 @@
 % https://pygments.org/docs/tokens/
 % https://pygments.org/docs/styledevelopment/#creating-own-styles
 % 'custom':  'custom::CustomStyle' in /usr/lib/python3.10/site-packages/pygments/styles/__init__.py
+% https://tex.stackexchange.com/questions/18083/how-to-add-custom-c-keywords-to-be-recognized-by-minted#comment930474_42392
 \usemintedstyle{custom}
 
 % https://tex.stackexchange.com/questions/345976/global-settings-for-minted
@@ -21,11 +22,13 @@
   \setminted{linenos}
 }{}
 
-\setlist[itemize]{itemsep=2mm, parsep=0mm, partopsep=0mm, topsep=0.25cm}
+% https://tex.stackexchange.com/questions/325003/given-enumitem-beamer-incompatibility-how-do-i-adjust-the-indent-of-the-enume
+% https://tex.stackexchange.com/questions/455692/beamer-presentation-with-itemize-exceed-text-capacity
+% \setlist[itemize]{itemsep=2mm, topsep=2mm, parsep=0mm, partopsep=0mm}
 
-% ┌─────────────────┐
-% │ Classical Boxes │
-% └─────────────────┘
+% ┌───────┐
+% │ Boxes │
+% └───────┘
 
 \DeclareTCBInputListing{\codebox}{ s o m }{listing file={#3},
   enhanced,colframe=PrimaryColor,colback=BoxColor,IfBooleanTF={#1}{colframe=SecondaryColor}{colframe=PrimaryColor},fonttitle=\tiny,#2,listing only,halign title=center,drop fuzzy shadow,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,boxrule=0.5mm,listing engine=minted}
@@ -66,6 +69,29 @@ enhanced,colframe=PrimaryColor,colback=BoxColor,hbox,listing only,halign title=c
 
 \numberwithin{equation}{section}
 
+% ┌───────────────┐
+% │ Beamer Blocks │
+% └───────────────┘
+
+\newcounter{custom}[section]
+
+% https://tex.stackexchange.com/questions/309463/beamer-numerating-theorems-and-color-of-block
+\setbeamertemplate{theorems}[numbered]
+
+% https://tex.stackexchange.com/questions/152565/define-a-new-block-environment-in-latex-beamer
+\renewenvironment<>{custom}[1]{%
+  \setbeamercolor{block title}{fg=white,bg=PrimaryColor}%
+\begin{block}#2{Custom \arabic{section}{.}\thecustom:\enspace\ignorespaces #1 \notebook}}{\end{block}\stepcounter{custom}}
+
+\newenvironment<>{acustom}[1]{%
+  \setbeamercolor{block title}{fg=white,bg=SecondaryColor}%
+\begin{block}#2{Custom \thesection{.}\arabic{custom}:\enspace\ignorespaces #1 \anotebook}\itshape}{\end{block}\stepcounter{custom}}
+
+% https://stackoverflow.com/questions/34274267/how-can-i-number-theorems-definitions-etc-etc-consecutively-in-latex-without
+\newtheorem{customtheorem}{Custom Theorem}[section]
+\newtheorem{subcustomtheorem}{Sub Custom Theorem}[customtheorem]
+\newtheorem{ocustomtheorem}[customtheorem]{Custom Theorem}
+
 % ┌──────────────┐
 % │ New Commands │
 % └──────────────┘
@@ -73,13 +99,10 @@ enhanced,colframe=PrimaryColor,colback=BoxColor,hbox,listing only,halign title=c
 % alternative alert
 \newcommand\aalert[1]{\textcolor{PrimaryColor}{#1}}
 
-\newcommand{\coloritem}{%
-\item[\textcolor{SecondaryColor}{$\blacktriangleright$}]\ignorespaces}
+% \newcommand{\coloritem}{%
+% \item[\textcolor{SecondaryColor}{$\blacktriangleright$}]\ignorespaces}
 
-\newcommand{\colorlabel[1]}{%
-\item[\textcolor{SecondaryColor}{$\blacktriangleright$}]\Alert{#1:}\enspace\ignorespaces}
-
-\newcommand{\greyitem}{%
+\newcommand{\grayitem}{%
 \item[\textcolor{gray!90!black}{$\blacktriangleright$}]\ignorespaces}
 
 % https://tex.stackexchange.com/questions/329990/how-do-i-change-the-color-of-itemize-bullet-specific-and-default
@@ -89,6 +112,7 @@ enhanced,colframe=PrimaryColor,colback=BoxColor,hbox,listing only,halign title=c
 % \renewcommand{\labelitemiv}{$\textcolor{PrimaryColor}{\ast}$}
 
 \newcommand{\notebook}{\hfill\includegraphics[height=3mm]{./figures/note.png}}
+\newcommand{\anotebook}{\hfill\includegraphics[height=3mm]{./figures/anote.png}}
 
 \newcommand{\magnifier}{\hfill\includegraphics[height=3mm]{./figures/lupe.png}}
 
@@ -99,3 +123,7 @@ enhanced,colframe=PrimaryColor,colback=BoxColor,hbox,listing only,halign title=c
   \end{minipage}%
   }%
 }
+
+% https://tex.stackexchange.com/questions/188379/theorem-numbering-in-beamer
+% Nummerierung der Theorem und Berücksichtigung der Sections
+\renewcommand\thetheorem{\arabic{section}.\arabic{theorem}}

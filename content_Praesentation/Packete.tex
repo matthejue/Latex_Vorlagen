@@ -14,12 +14,16 @@
 
 % \usepackage[margin=1.5cm, headheight=12.5pt]{geometry}
 \usepackage[ngerman]{babel}
-\usepackage{lipsum}
+
+% \usepackage{lipsum}
+
 \usepackage[parfill]{parskip}
 % % https://latexref.xyz/bs-par.html
 \setlength{\parskip}{0.4cm} % space between paragraphs
 % \usepackage{setspace}
-\usepackage{graphicx}
+
+% as beamer itself already provides these functionalities, there is no need to load hyperref, color, graphicx, graphics
+% \usepackage{graphicx}
 
 % % https://tex.stackexchange.com/questions/48509/insert-list-of-figures-in-the-table-of-contents
 % \usepackage[nottoc]{tocbibind}
@@ -86,7 +90,9 @@
 
 % https://stackoverflow.com/questions/1061112/eliminate-space-before-beginitemize
 % https://tex.stackexchange.com/questions/31505/trouble-combining-enumitem-and-beamer
-\usepackage{enumitem}
+% https://tex.stackexchange.com/questions/325003/given-enumitem-beamer-incompatibility-how-do-i-adjust-the-indent-of-the-enume
+% https://tex.stackexchange.com/questions/455692/beamer-presentation-with-itemize-exceed-text-capacity
+% \usepackage{enumitem}
 
 % https://tex.stackexchange.com/a/263470
 \usepackage{microtype}
@@ -171,3 +177,6 @@
 
 % % https://tex.stackexchange.com/questions/531/what-is-the-best-way-to-use-quotation-mark-glyphs
 \usepackage{csquotes}
+
+% https://tex.stackexchange.com/questions/326527/colored-blocks-for-numbered-theorems-in-beamer
+\usepackage{etoolbox}% new package to be loaded

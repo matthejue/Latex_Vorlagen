@@ -4,15 +4,104 @@
 % ./Deklarationen.tex
 % ./Kapitel2.tex
 
+
 \if\hide0\section{Kapitel 1}\fi
 
-\begin{frame}[label={kapitel1}]{Kapitel 2}{Beispiel Definitionsbox}
-  \begin{block}{Test \notebook}
-    \lipsum[1]
-  \end{block}
+\begin{frame}[label={kapitel1}]{Kapitel 1}{Beispiele Custom Block Environments}
+  \begin{custom}{Random}
+    random text
+  \end{custom}
+
+  \begin{acustom}{Random}
+    random text
+  \end{acustom}
 \end{frame}
 
-\begin{frame}{Kapitel 1}{Beispiel für Tabelle}
+\begin{frame}{Kapitel 1}{Beispiele für Custom Block Environments}
+  \begin{custom}{Random}
+    random text
+  \end{custom}
+
+  \begin{acustom}{Random}
+    random text
+  \end{acustom}
+\end{frame}
+
+\begin{frame}{Kapitel 1}{Beispiele für Block Environments}
+  % https://latex-beamer.com/tutorials/blocks/
+  \begin{block}{Wichtiger Bereich}
+    random text
+  \end{block}
+
+  \begin{exampleblock}{Wichtiges Beispiel}
+    random text
+  \end{exampleblock}
+
+  \begin{alertblock}{Wichtiges Text}
+    random text
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}{Kapitel 1}{Beispiele für weitere Custom Theorem Environments}
+  \begin{customtheorem}[Wichtiges Custom Theorem]
+    random text
+  \end{customtheorem}
+
+  \begin{subcustomtheorem}[Wichtiges Sub Custom Theorem]
+    random text
+  \end{subcustomtheorem}
+
+  \begin{ocustomtheorem}[Wichtiges Custom Theorem]
+    random text
+  \end{ocustomtheorem}
+\end{frame}
+
+\begin{frame}{Kapitel 1}{Beispiele für Theorem Environments}
+  \begin{theorem}[Wichtiges Theorem]
+    random text
+  \end{theorem}
+
+  \begin{corollary}[Wichtiges Korrolar]
+    random text
+  \end{corollary}
+
+  \begin{lemma}[Wichtiges Lemma]
+    random text
+  \end{lemma}
+
+  \begin{proof}[Wichtiger Beweis]
+    random text
+  \end{proof}
+\end{frame}
+
+\if\hide0\section{Kapitel 2}\fi
+
+\begin{frame}[label={kapitel2}]{Kapitel 2}{Beispiele für weitere Theorem Environments}
+
+  \begin{definition}[test]
+    random text
+  \end{definition}
+
+  \begin{definitions}[test]
+    random text
+  \end{definitions}
+
+  \begin{fact}[test]
+    random text
+  \end{fact}
+
+  \begin{example}[test]
+    ist im Gegensatz zu exampleblock durchnummeriert
+  \end{example}
+\end{frame}
+
+\begin{frame}{Kapitel 2}{Beispiele für weitere Theorem Environments}
+  \begin{examples}[test]
+    random text
+  \end{examples}
+\end{frame}
+
+\begin{frame}{Kapitel 2}{Beispiel für Tabelle}
   \scriptsize
   \begin{table}[H]
     \center
