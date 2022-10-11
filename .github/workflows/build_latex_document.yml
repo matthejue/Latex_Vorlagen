@@ -1,0 +1,38 @@
+name: Build LaTeX document
+on: [push]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    # - uses: xu-cheng/texlive-action/full@v1
+
+    - uses: matthejue/texlive-action-personal-copy/full@master
+      with:
+        run: |
+          apk add make
+          "make" "Vorlage_Praesentation.pdf"
+      continue-on-error: true
+    - name: Push log file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.UPLOAD_TO_REPO }}
+      with:
+        source_file: 'Vorlage_Praesentation.log'
+        destination_repo: 'matthejue/Bachelorarbeit_Uebungsblatt_out'
+        destination_folder: ''
+        user_email: 'matthejue@gmail.com'
+        user_name: 'matthejue'
+        commit_message: 'updated log'
+    - name: Push test file
+      uses: dmnemec/copy_file_to_another_repo_action@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.UPLOAD_TO_REPO }}
+      with:
+        source_file: 'Vorlage_Praesentation.pdf'
+        destination_repo: 'matthejue/Bachelorarbeit_Uebungsblatt_out'
+        destination_folder: ''
+        user_email: 'matthejue@gmail.com'
+        user_name: 'matthejue'
+        commit_message: 'updated pdf'
