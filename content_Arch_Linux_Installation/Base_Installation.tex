@@ -13,15 +13,6 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Check UEFI}
-  \begin{itemize}
-    \item \alert{check for uefi mode:} \inlinebox{ls /sys/firmware/efi/efivars} check if exists.
-      \begin{itemize}
-        \item There should be output.
-      \end{itemize}
-  \end{itemize}
-\end{frame}
-
 \begin{frame}[fragile]{Keyboard Layout (for the Installation)}
   \begin{itemize}
     \item \inlinebox*{ls /usr/share/kbd/keymaps/**/*.map.gz | less}
@@ -32,7 +23,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile,allowframebreaks]{Wifi connection}
+\begin{frame}[fragile,allowframebreaks]{Wifi connection\vspace{0.25cm}}
   \begin{itemize}
     \item \inlinebox*{ping -c 1 google.com}
     \begin{itemize}
@@ -40,7 +31,7 @@
     \end{itemize}
     \begin{block}{LAN}
       \begin{itemize}
-        \item \alert{find out interface:} \inlinebox*{ip link} or \inlinebox*{ip a} (addr show).
+        \item \alert{find out interface:} \inlinebox*{ip link} or \inlinebox*{ip a} (\inlinebox{addr show}).
           \begin{itemize}
             \item ignore loopback.
           \end{itemize}
@@ -50,29 +41,39 @@
     \end{block}
     \begin{block}{WLAN}
       \begin{itemize}
-        \item \alert{find out.}
+        \item Shell öffnen: \inlinebox{iwctl} (\inlinebox{sudo pacman -S iwd}), \inlinebox{systemctl enable iwd.service --now}.
+        \item \alert{wireless interfances installed on system:} \inlinebox{device list}.
+        \item \alert{start search for wireless access points:} {\tiny \inlinebox{station <name of device, e.g. wlan0> scan}}.
+        \item \alert{found wifi networks:} {\tiny\inlinebox{station <name of device, e.g. wlan0> get-networks}.}
+        \item \alert{connect:} {\tiny \inlinebox{station <name of device, e.g. wlan0> connect "<name of network>"}.}
+        \item \alert{disconnect from prompt:} \key{Ctrl-d}.
+        \item \alert{check if all worked:} \inlinebox{ip addr show} if it shows a ip address.
       \end{itemize}
     \end{block}
   \end{itemize}
-  \begin{Sidenote}
-    \begin{itemize}
-      \scriptsize
-      \item sometimes one has to manually start the dhcp client \inlinebox{dhcpcd}.
-      \item netctl (and therefore wifi-menu) got removed from the Arch Linux ISO starting July 2020. To get connected while installing Arch, use \inlinebox{iwctl}. If it's blocked, either use that physical switch, or use \inlinebox{rfkill unblock wifi}. Then, type in \inlinebox{iwctl}. When you're in \inlinebox{iwctl}, use \inlinebox{device list} to see the name that the wifi router is using. For commands after this, replace device with the name of the device as found using the \inlinebox{device list} command. If you want to get the name of the network you want to use, use \inlinebox{station device scan} and then \inlinebox{station device get-networks}. After that, type in \inlinebox{station device connect SSID*}, with the *SSID being the name of the internet you want to use. If there is a password on the wifi, type that in when it asks for the wifi. After that, press Ctrl+C to get back to the terminal/root@archiso.
-    \end{itemize}
-  \end{Sidenote}
+  % \begin{Sidenote}
+  %   \begin{itemize}
+  %     \scriptsize
+  %     \item sometimes one has to manually start the dhcp client \inlinebox{dhcpcd}.
+  %     \item netctl (and therefore wifi-menu) got removed from the Arch Linux ISO starting July 2020. To get connected while installing Arch, use \inlinebox{iwctl}. If it's blocked, either use that physical switch, or use \inlinebox{rfkill unblock wifi}. Then, type in \inlinebox{iwctl}. When you're in \inlinebox{iwctl}, use \inlinebox{device list} to see the name that the wifi router is using. For commands after this, replace device with the name of the device as found using the \inlinebox{device list} command. If you want to get the name of the network you want to use, use \inlinebox{station device scan} and then \inlinebox{station device get-networks}. After that, type in \inlinebox{station device connect SSID*}, with the *SSID being the name of the internet you want to use. If there is a password on the wifi, type that in when it asks for the wifi. After that, press Ctrl+C to get back to the terminal/root@archiso.
+  %   \end{itemize}
+  % \end{Sidenote}
+\end{frame}
+
+\begin{frame}[fragile]{Check UEFI}
+  \begin{itemize}
+    \item \alert{check for uefi mode:} \inlinebox{ls /sys/firmware/efi/efivars} check if exists.
+      \begin{itemize}
+        \item There should be output.
+      \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Reorder Mirrorlist (optional)}
   \begin{itemize}
-    \item reorder mirrolist: \inlinebox{nvim etc/pacman.d/mirrorlist} (first entry will be taken first, if offline the second etc.)
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Time}
-  \begin{itemize}
-    \item \inlinebox{timedatectl set-ntp true}
-    \item verify with \inlinebox{timedatectl status} (or \inlinebox{date}), should be utc
+    \item \alert{reorder mirrolist:} \inlinebox{nvim /etc/pacman.d/mirrorlist} (first entry will be taken first, if offline the second etc.)
+    \item \inlinebox{/usr/bin/rankmirrors}
+    \item \url{https://archlinux.org/mirrors/status/}
   \end{itemize}
 \end{frame}
 
@@ -115,11 +116,10 @@
           \item all installed previously has to be installed again, because it was only in the installation media
         \end{itemize}
       \end{Sidenote}
-    \item \inlinebox{genfstab -U /mnt >> /mnt/etc/fstab} (generate filesystem table file)
+    \item \inlinebox{genfstab -U /mnt >> /mnt/etc/fstab} (generate filesystem table file) // vielleicht besser vor pacstrap?
     \item \inlinebox{cat /mnt/etc/fstab} (take a look at it)
       \item other options: \inlinebox{-p} and \inlinebox{-h} (help)
       \item \inlinebox{arch-chroot /mnt} (change into root directory of new installation, now root user in new linux system)
-      \item \inlinebox{/bin/bash}
   \end{itemize}
   \begin{Sidenote}
     \begin{itemize}
@@ -132,13 +132,11 @@
 \begin{frame}[fragile,allowframebreaks]{Timezone\vspace{0.5cm}}
   \begin{itemize}
     \item \inlinebox{ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime} (use \inlinebox{tab} to see possible options)
-    \item \inlinebox{hwclock --systohc --utc}: write the current software UTC time to the hardware clock
-      \item If you specify neither \inlinebox{--utc} nor \inlinebox{--localtime} then the one last given with a set function  (\inlinebox{--set}, \inlinebox{--systohc}, or \inlinebox{--adjust}), as recorded in \inlinebox{/etc/adjtime}, will be used. If the adjtime file doesn't exist, the default is UTC
-      \item the \inlinebox{date} time should correspond to current localtime
-      \item \inlinebox{sudo hwclock --show} (does already add up the winter time (+1) and the summer time (+2))
     \item \inlinebox{vim /etc/locale.gen}, uncomment locale \inlinebox{en_US.UTF-8 UTF-8}
-      \item determines the language, monetary values, time and date formats etc. of the system
-      \item \inlinebox{pacman -S neovim}
+      \begin{itemize}
+        \item determines the language, monetary values, time and date formats etc. of the system
+        \item \inlinebox{pacman -S neovim}
+      \end{itemize}
     \item \inlinebox{locale-gen} to generate the choosen locale
     \item \inlinebox{echo LANG=en_US.UTF-8 > /etc/locale.conf}
   \end{itemize}
@@ -147,7 +145,11 @@
 \begin{frame}[fragile,allowframebreaks]{Timezone}{timedatectl\vspace{0.5cm}}
   \begin{itemize}
     \item \inlinebox{timedatectl set-ntp true}: Controls whether network time synchronization is active and enabled (if available). If the argument is true, this enables and starts the first existing network synchronization service
-    \item \alert{old way:} \inlinebox{sudo ntpd -qg} to manually synchronize your clock with the network, ignoring large deviations between local UTC and network UTC
+      \begin{Sidenote}
+        \begin{itemize}
+          \item \alert{old way:} \inlinebox{sudo ntpd -qg} to manually synchronize your clock with the network, ignoring large deviations between local UTC and network UTC
+        \end{itemize}
+      \end{Sidenote}
     \item  \inlinebox{timedatectl set-timezone Europe/Berlin}: Set the system time zone to the specified value
       \item this will create an \inlinebox{/etc/localtime} symlink that points to a zoneinfo file under \inlinebox{/usr/share/zoneinfo/}
     \item \inlinebox{timedatectl list-timezones}: list available time zones
@@ -159,24 +161,53 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile,allowframebreaks]{Time}
+  \begin{itemize}
+    \item \inlinebox{timedatectl set-ntp true}
+    \item verify with \inlinebox{timedatectl status} (or \inlinebox{date}), should be utc
+    \item \inlinebox{hwclock --systohc --utc}: write the current software UTC time to the hardware clock
+      \begin{itemize}
+        \item If you specify neither \inlinebox{--utc} nor \inlinebox{--localtime} then the one last given with a set function  (\inlinebox{--set}, \inlinebox{--systohc}, or \inlinebox{--adjust}), as recorded in \inlinebox{/etc/adjtime}, will be used. If the adjtime file doesn't exist, the default is UTC
+          \begin{itemize}
+            \item the \inlinebox{date} time should correspond to current localtime
+          \end{itemize}
+        \item \inlinebox{sudo hwclock --show} (does already add up the winter time (+1) and the summer time (+2))
+      \end{itemize}
+    \item \inlinebox{systemctl enable systemd-timeyncd}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}[fragile,allowframebreaks]{User and Root}
   \begin{itemize}
     \item \inlinebox{echo ArchPC > /etc/hostname}, type in username
     \item \inlinebox{passwd} for root user
     \item \inlinebox{useradd -m -g users -G wheel areo} or \inlinebox{useradd -m -G users,wheel areo}
-    \item or {\tiny\inlinebox{sudo useradd -m (-g username) -G additional_groups -s login_shell username}} or \inlinebox{useradd -n areo} and \inlinebox{usermod -aG wheel.audio.video.optical.storage areo}
-      \item other options: \inlinebox{-s /bin/bash}
+      \begin{itemize}
+        \item or {\tiny\inlinebox{sudo useradd -m (-g username) -G additional_groups -s login_shell username}} or \inlinebox{useradd -n areo} and \inlinebox{usermod -aG wheel.audio.video.optical.storage areo}
+        \item other options: \inlinebox{-s /bin/bash}
+      \end{itemize}
     \item \inlinebox{passwd areo}
     \item \inlinebox{pacman -S sudo}
-      \item find out if it's installed with \inlinebox{which sudo}
-      \item else \inlinebox{pacman -S which sudo} or just directly \inlinebox{pacman -S base-devel}
+      \begin{itemize}
+        \item find out if it's installed with \inlinebox{which sudo}
+        \item else \inlinebox{pacman -S which sudo} or just directly \inlinebox{pacman -S base-devel}
+      \end{itemize}
     \item \inlinebox{EDITOR=nvim visudo} to edit sudoers file in nvim and uncomment \inlinebox{%whell ALL=(ALL) ALL}
+    \item
   \end{itemize}
     \begin{Sidenote}
       \begin{itemize}
         \item user, group and password management tools on Arch Linux come from the shadow package, which is a dependency of the base package
       \end{itemize}
     \end{Sidenote}
+  \begin{itemize}
+      \item \inlinebox{hostnamectl set-hostname <hostname>}
+    \begin{itemize}
+      \item \inlinebox{cat /etc/hostname}
+    \end{itemize}
+    \item \inlinebox{nvim /etc/hosts} and add \inlinebox{127.0.0.1 localhost} and newline \inlinebox{127.0.1.1 <hostname>}
+    \item check by running \inlinebox*{hostnamectl}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{Keyboard-Layout}
@@ -215,7 +246,7 @@
   \end{Sidenote}
   \begin{Sidenote}
     \begin{itemize}
-      \item \alert{other packages:} \inlinebox{pacman -S wpa_supplicant wireless_tools netctl}, if there's no wired connection one can use \inlinebox{wifi-menu} from the \inlinebox{netctl} package.
+      \item \alert{other packages:} \inlinebox{pacman -S wpa_supplicant wireless_tools netctl}, if there's no wired connection one can use \inlinebox{iwdctl} from the \inlinebox{iwd} package (earlier versions: \inlinebox{wifi-menu} from the \inlinebox{netctl} package).
     \end{itemize}
   \end{Sidenote}
 \end{frame}
@@ -244,13 +275,13 @@
         \item if two EFI-Partitions exist (one from Windows: \inlinebox{/dev/sda1}  and one for Arch: \inlinebox{dev/sda5}): \inlinebox{mount /dev/sda1/ /mnt} (EFI-Partition of Windows has to be mounted, so that the os-prober can find it) or \inlinebox{mdkdir /mnt2} and \inlinebox{mount /dev/sda1/ /mnt2}
       \end{itemize}
     \item \inlinebox{grub-mkconfig -o /boot/grub/grub.cfg}
-    \begin{Sidenote}
-      \begin{itemize}
-        \scriptsize
-        \item or don't use grub and just choose with e.g. \inlinebox{f12} a bootloader from the bootmenu (maybe has to be enabled in the uefi-firmware settings)
-      \end{itemize}
-    \end{Sidenote}
   \end{itemize}
+  \begin{Sidenote}
+    \begin{itemize}
+      \scriptsize
+      \item or don't use grub and just choose with e.g. \inlinebox{f12} a bootloader from the bootmenu (maybe has to be enabled in the uefi-firmware settings)
+    \end{itemize}
+  \end{Sidenote}
 \end{frame}
 
 \begin{frame}{Swapile (Optional)}

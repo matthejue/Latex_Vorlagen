@@ -25,8 +25,10 @@
       \end{itemize}
     \item \alert{xfce:}
       \begin{itemize}
-        \item \inlinebox{sudo pacman -S xfce4}
+        \item \inlinebox{sudo pacman -S xfce4, xfce4-goodies, lightdm, lightdm-gtk-greeter}, \inlinebox{systemctl enable lightdm}
       \end{itemize}
+    \item \alert{gnome:} \inlinebox{pacman -S gnome}, \inlinebox{gnome-tweaks}, \inlinebox{systemctl enable gdm}
+    \item \alert{kde:}  \inlinebox{plasma-meta}, \inlinebox{kde-applications}, \inlinebox{systemctl enable sddm}
     \item \inlinebox{cp /etc/X11/xinit/xinitrc /home/areo/.xinitrc}
     \item \inlinebox{nvim ~/.xinitrc}: write \inlinebox{exex i3} or \inlinebox{exec xfce4-session} in there
     \item \inlinebox{startx} to start
@@ -78,9 +80,10 @@
 
 \begin{frame}[fragile]{CPU/GPU}
   \begin{itemize}
-    \item \inlinebox{pacman -S amd-ucode} or \inlinebox{pacman -S intel-ucode}
+    \item \alert{Microcode:} \inlinebox{pacman -S amd-ucode} or \inlinebox{pacman -S intel-ucode}
     \item \inlinebox{pacman -S xf86-video-intel}
     \item \inlinebox{pacman -S mesa} (if intel or amd for graphics) or \inlinebox{pacman -S nvidea nvidea-utils} (nvideo for graphics) and \inlinebox{pacman -S nvidea-lts} (if one installed the lts-kernel)
+    \item \inlinebox{pacman -S virtualbox-guest-utils xf86-video-vmware} and \inlinebox{systemctl enable vboxservice}(if in Virtualbox)
   \end{itemize}
 \end{frame}
 
