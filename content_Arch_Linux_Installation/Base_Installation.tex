@@ -7,6 +7,21 @@
 
 \section{Base Installation}
 
+\begin{frame}[fragile]{Official Installation Guide}
+  \begin{itemize}
+    \item \url{https://wiki.archlinux.org/title/Installation_guide}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Check UEFI}
+  \begin{itemize}
+    \item \alert{check for uefi mode:} \inlinebox{ls /sys/firmware/efi/efivars} check if exists.
+      \begin{itemize}
+        \item There should be output.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
 \begin{frame}[fragile]{Keyboard Layout (for the Installation)}
   \begin{itemize}
     \item \inlinebox*{ls /usr/share/kbd/keymaps/**/*.map.gz | less}
@@ -19,9 +34,25 @@
 
 \begin{frame}[fragile,allowframebreaks]{Wifi connection}
   \begin{itemize}
-    \item \inlinebox*{ls /usr/share/kbd/keymaps/**/*.map.gz | less}
     \item \inlinebox*{ping -c 1 google.com}
-    \item \inlinebox*{ip link or ip a (addr show)}
+    \begin{itemize}
+      \item \alert{if not:} $\Rightarrow$ Boxes
+    \end{itemize}
+    \begin{block}{LAN}
+      \begin{itemize}
+        \item \alert{find out interface:} \inlinebox*{ip link} or \inlinebox*{ip a} (addr show).
+          \begin{itemize}
+            \item ignore loopback.
+          \end{itemize}
+        \item \inlinebox{ip link set dev <interface-name>}.
+        \item \inlinebox{dhcpcd enp1s0 <interface-name>}.
+      \end{itemize}
+    \end{block}
+    \begin{block}{WLAN}
+      \begin{itemize}
+        \item \alert{find out.}
+      \end{itemize}
+    \end{block}
   \end{itemize}
   \begin{Sidenote}
     \begin{itemize}
@@ -32,11 +63,9 @@
   \end{Sidenote}
 \end{frame}
 
-\begin{frame}[fragile]{Optional}
+\begin{frame}[fragile]{Reorder Mirrorlist (optional)}
   \begin{itemize}
     \item reorder mirrolist: \inlinebox{nvim etc/pacman.d/mirrorlist} (first entry will be taken first, if offline the second etc.)
-    \item before that: \inlinebox{pacman -S neovim} (already root)
-    \item check for uefi mode: \inlinebox{ls /sys/firmware/efi/efivars} check if exists
   \end{itemize}
 \end{frame}
 
