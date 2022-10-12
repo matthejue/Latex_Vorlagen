@@ -22,14 +22,14 @@
     \item \inlinebox*{ls /usr/share/kbd/keymaps/**/*.map.gz | less}
     \item \inlinebox*{ping -c 1 google.com}
     \item \inlinebox*{ip link or ip a (addr show)}
-    \begin{Sidenote}
-      \begin{itemize}
-        \scriptsize
-        \item sometimes one has to manually start the dhcp client \inlinebox{dhcpcd}.
-        \item netctl (and therefore wifi-menu) got removed from the Arch Linux ISO starting July 2020. To get connected while installing Arch, use \inlinebox{iwctl}. If it's blocked, either use that physical switch, or use \inlinebox{rfkill unblock wifi}. Then, type in \inlinebox{iwctl}. When you're in \inlinebox{iwctl}, use \inlinebox{device list} to see the name that the wifi router is using. For commands after this, replace device with the name of the device as found using the \inlinebox{device list} command. If you want to get the name of the network you want to use, use \inlinebox{station device scan} and then \inlinebox{station device get-networks}. After that, type in \inlinebox{station device connect SSID*}, with the *SSID being the name of the internet you want to use. If there is a password on the wifi, type that in when it asks for the wifi. After that, press Ctrl+C to get back to the terminal/root@archiso.
-      \end{itemize}
-    \end{Sidenote}
   \end{itemize}
+  \begin{Sidenote}
+    \begin{itemize}
+      \scriptsize
+      \item sometimes one has to manually start the dhcp client \inlinebox{dhcpcd}.
+      \item netctl (and therefore wifi-menu) got removed from the Arch Linux ISO starting July 2020. To get connected while installing Arch, use \inlinebox{iwctl}. If it's blocked, either use that physical switch, or use \inlinebox{rfkill unblock wifi}. Then, type in \inlinebox{iwctl}. When you're in \inlinebox{iwctl}, use \inlinebox{device list} to see the name that the wifi router is using. For commands after this, replace device with the name of the device as found using the \inlinebox{device list} command. If you want to get the name of the network you want to use, use \inlinebox{station device scan} and then \inlinebox{station device get-networks}. After that, type in \inlinebox{station device connect SSID*}, with the *SSID being the name of the internet you want to use. If there is a password on the wifi, type that in when it asks for the wifi. After that, press Ctrl+C to get back to the terminal/root@archiso.
+    \end{itemize}
+  \end{Sidenote}
 \end{frame}
 
 \begin{frame}[fragile]{Optional}
@@ -91,13 +91,13 @@
       \item other options: \inlinebox{-p} and \inlinebox{-h} (help)
       \item \inlinebox{arch-chroot /mnt} (change into root directory of new installation, now root user in new linux system)
       \item \inlinebox{/bin/bash}
-    \begin{Sidenote}
-      \begin{itemize}
-        \scriptsize
-        \item create ramdisk for the linux kernel: \inlinebox{mkinitcpio -p linux}, \inlinebox{mkinitcpio -p linux-lts} (or \inlinebox{-P})
-      \end{itemize}
-    \end{Sidenote}
   \end{itemize}
+  \begin{Sidenote}
+    \begin{itemize}
+      \scriptsize
+      \item create ramdisk for the linux kernel: \inlinebox{mkinitcpio -p linux}, \inlinebox{mkinitcpio -p linux-lts} (or \inlinebox{-P})
+    \end{itemize}
+  \end{Sidenote}
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{Timezone\vspace{0.5cm}}
@@ -177,18 +177,18 @@
       \item put \inlinebox{nm-applet &} into \inlinebox{~/.xinitrc}
       \item there's a autostart desktop entry automaticaly created under \inlinebox{/etc/xdg/autostart/nm-applet.desktop}
       \item i3 already autostarts it in it's \inlinebox{~/.configs/i3/config}: \inlinebox{exec --no-startup-id nm-applet}
-      \begin{Sidenote}
-        \begin{itemize}
-          \item there is also \inlinebox{yay -S networkmanager-dmenu-git}
-        \end{itemize}
-      \end{Sidenote}
       \end{itemize}
+  \end{itemize}
   \begin{Sidenote}
     \begin{itemize}
-      \item other packages: \inlinebox{pacman -S wpa_supplicant wireless_tools netctl}, if there's no wired connection one can use \inlinebox{wifi-menu} from the \inlinebox{netctl} package
+      \item there is also \inlinebox{yay -S networkmanager-dmenu-git}.
     \end{itemize}
   \end{Sidenote}
-  \end{itemize}
+  \begin{Sidenote}
+    \begin{itemize}
+      \item \alert{other packages:} \inlinebox{pacman -S wpa_supplicant wireless_tools netctl}, if there's no wired connection one can use \inlinebox{wifi-menu} from the \inlinebox{netctl} package.
+    \end{itemize}
+  \end{Sidenote}
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{Grub}

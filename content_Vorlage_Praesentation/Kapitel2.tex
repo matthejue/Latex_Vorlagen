@@ -91,3 +91,38 @@
   \lipsum[1-2]
   \vspace{0.5cm}
 \end{frame}
+
+% https://tex.stackexchange.com/questions/9889/positioning-content-at-the-top-of-a-beamer-slide-by-default
+\begin{frame}[t]{Text nach oben verschieben}
+  \begin{columns}
+    \begin{column}[t]{0.5\textwidth}
+      \begin{itemize}
+        \item test 1
+        \item test 2
+      \end{itemize}
+    \end{column}
+    \begin{column}[t]{0.5\textwidth}
+      \begin{itemize}
+        \item test 1
+        \item test 2
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Text zentriert (default)}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item test 1
+        \item test 2
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item test 1
+        \item test 2
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}

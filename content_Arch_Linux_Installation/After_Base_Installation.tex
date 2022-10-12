@@ -152,3 +152,108 @@
     \item \inlinebox{scrot} ($\rightarrow$ configuration in \inlinebox{~/.config/i3/config} file)
   \end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]{SysRq-Key einsetzen}
+  \begin{itemize}
+    \item \alert{reboot:} \key{alt} + \key{print} + each of \smalltt{reisub}.
+    \item \alert{shut down:} \key{alt} + \key{print} + each of \smalltt{reisuo}.
+    \item Bedeutung der Keys kann hier nachgelesen werden: \url{https://en.wikipedia.org/wiki/Magic_SysRq_key}.
+    % \item https://en.wikipedia.org/wiki/Magic_SysRq_key
+  \end{itemize}
+  \begin{Sidenote}
+    \begin{itemize}
+      \item Nach dem Auslösen von e sollte man den Prozessen ein paar Sekunden Zeit lassen, der Aufforderung, sich sauber zu beenden, nachzukommen.
+      \item SysRq may be released before pressing the command key, as long as Alt remains held down.
+      \item this keys are for the querty keyboard.
+    \end{itemize}
+  \end{Sidenote}
+\end{frame}
+
+\begin{frame}[fragile]{SysRq-Key aktivieren}
+  \begin{itemize}
+    \item \alert{direkt aktivieren, aber nicht persistent} {\tiny \inlinebox{echo "1" | sudo tee /proc/sys/kernel/sysrq}}.
+    \item \alert{persistent aktivieren} {\tiny \inlinebox*{echo kernel.sysrq=1 | sudo tee /etc/sysctl.d/99-sysctl.conf}.}
+  \end{itemize}
+  % \item https://linuxconfig.org/how-to-enable-all-sysrq-functions-on-linux
+  % \item https://archived.forum.manjaro.org/t/how-to-permanently-enable-the-sysrq-key/137650/6
+  \begin{Sidenote}
+    \begin{itemize}
+      \scriptsize
+      \item \alert{geht auch:} {\tiny {\tiny \inlinebox*{sudo bash -c "echo kernel.sysrq=1 > /etc/sysctl.d/99-sysctl.conf"}}}.
+      \item {\tiny \inlineboxsout*{sudo echo "kernel.sysrq=1" > /etc/sysctl.d/99-sysctl.conf}}.
+      \begin{itemize}
+        \item The reason it doesn't work is that ones gives root privileges to echo, which it doesn't need to print to stdout. It's bash doing the writing to file and that's running under your user.
+      \end{itemize}
+      \item \inlinebox{tee -a} or \inlinebox{>>} for appending.
+    \end{itemize}
+  \end{Sidenote}
+\end{frame}
+
+\begin{frame}[fragile, t]{SysRq-Key checken}
+  % , squeeze
+  \begin{columns}
+    \begin{column}[t]{0.5\textwidth}
+      \begin{itemize}
+        \item \inlinebox{cat /proc/sys/kernel/sysrq}
+          \begin{itemize}
+            \item 0 - disable sysrq completely.
+            \item 1 - enable all functions of sysrq.
+            \item 2 - enable control of console logging level.
+            \item 4 - enable control of keyboard (SAK, unraw).
+            \item 8 - enable debugging dumps of processes etc.
+            \item 16 - enable sync command.
+            \item 32 - enable remount read-only.
+            \item 64 - enable signaling of processes (term, kill, oom-kill).
+          \end{itemize}
+      \end{itemize}
+    \end{column}
+    \begin{column}[t]{0.5\textwidth}
+      \begin{itemize}
+        \item 128 - allow reboot/poweroff.
+        \item 256 - allow nicing of all RT tasks.
+      \end{itemize}
+      \vspace{0.3cm}
+      \begin{Sidenote}
+        \begin{itemize}
+         \scriptsize
+          \item 438 is obtained from the sum of 2 + 4 + 16 + 32 + 128 + 256, so all the corresponding functions are enabled.
+        \end{itemize}
+      \end{Sidenote}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Restore boobtable USB-Stick to normal}{Explanation}
+  \begin{itemize}
+    \item if one writes a iso-image onto a flash drive there're e.g 2 partitions encoded in the iso image and a lot of free space.
+    \item if one writes a iso to the flash drive, it will get a \alert{boot flag} (that can be seen with \inlinebox{sudo fdisk -l}. If one only formats it, it won't work correctly (can't remove partitions etc.).
+    \item one has to wipe filesystem completely from the flash drive, to restore it to it's original state.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks]{Restore boobtable USB-Stick to normal}{Format / repartition a storage device\vspace{0.5cm}}
+  \begin{itemize}
+    \item \inlinebox{sudo fdisk -l}
+    \item \inlinebox{lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT,LABEL}
+    \item \inlinebox{sudo wipefs --all /dev/sdc}
+    \begin{itemize}
+      \item whole drive, not \inlinebox{sdc1}!
+    \end{itemize}
+    \item \inlinebox{sudo cfdisk /dev/sdc}
+      \begin{itemize}
+        \item GPT wählen
+        \item DOS ist eine andere Bezeichnung für MBR
+      \end{itemize}
+    \item \inlinebox{sudo mkfs.ext4 /dev/sdc1}
+      \begin{itemize}
+        \item \inlinebox{-n 'My_USB'} to give it a name
+      \end{itemize}
+    \item \inlinebox{sudo chmod 755 . -R}
+    \item \inlinebox{sudo chown areo:users . -R}
+  \end{itemize}
+  \begin{Sidenote}
+    \begin{itemize}
+      \item need to \inlinebox{sudo umount /dev/sdX} flash drive before \inlinebox{wipefs} / \inlinebox{mkfs.vfat} etc.
+    \end{itemize}
+  \end{Sidenote}
+\end{frame}

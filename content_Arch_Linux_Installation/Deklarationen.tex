@@ -65,6 +65,12 @@ enhanced,colframe=PrimaryColor,colback=BoxColor,hbox,listing only,halign title=c
 {\textcolor{SecondaryColor}{\setBold >\enspace\ignorespaces}#2}%
 {#2}}
 
+\DeclareTotalTCBox{\inlineboxsout}{ s v }
+{verbatim,colback=SecondaryColorDimmed,colframe=SecondaryColor}
+{\IfBooleanTF{#1}%
+{\sout{\textcolor{SecondaryColor}{\setBold >\enspace\ignorespaces}#2}}%
+{\sout{#2}}}
+
 \DeclareTotalTCBox{\key}{ m }
 {verbatim,colback=SecondaryColorDimmed,colframe=SecondaryColor}
 {$\mathtt{#1}$}
@@ -140,3 +146,8 @@ after title={\hspace{0.2cm}\includegraphics[height=3mm]{./figures/lupe.png}}
 % https://tex.stackexchange.com/questions/188379/theorem-numbering-in-beamer
 % Nummerierung der Theorem und Berücksichtigung der Sections
 \renewcommand\thetheorem{\arabic{section}.\arabic{theorem}}
+
+% https://tex.stackexchange.com/questions/25710/how-to-continue-enumerate-across-columns-in-beamer
+% \newcounter{savedenum}
+% \newcommand*{\saveenum}{\setcounter{savedenum}{\theenumi}}
+% \newcommand*{\resume}{\setcounter{enumi}{\thesavedenum}}
