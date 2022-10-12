@@ -6,3 +6,149 @@
 % ./content_Arch_Linux_Installation/Base_Installation
 
 \section{After Base Installation}
+
+\begin{frame}[fragile]{General}
+  \begin{itemize}
+    \item if one forgot one step in the base installation with \inlinebox{su}, one can get root again.
+    \item {\tiny\inlinebox{sudo pacman -S base-devel, xorg-xkill, man-db texinfo openssh e2fsprogs, dialog}}: \inlinebox{base-devel} is for building aur packages and \inlinebox{sudo} and \inlinebox{which} are in there, enable \inlinebox{openssh} with \inlinebox{systemsctl enable sshd}, \inlinebox{dialog} is a cli-textbox some programs use.
+    \item if sth. goes wrong with the DE one can change tty with \inlinebox{ctrl + alt + fX} and make e.g. \inlinebox{killall i3}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks]{Desktop-Environment / WM\vspace{0.5cm}}
+  \begin{itemize}
+    \item \inlinebox{sudo pacman -S xorg-server xorg-xinit}
+    \item \alert{i3:}
+      \begin{itemize}
+        \item \inlinebox{sudo pacman -S i3-gaps i3status alacritty dmenu}
+        \item install fonts (i3 doesn't pull fonts), e.g. \inlinebox{sudo pacman -S noto-fonts}
+      \end{itemize}
+    \item \alert{xfce:}
+      \begin{itemize}
+        \item \inlinebox{sudo pacman -S xfce4}
+      \end{itemize}
+    \item \inlinebox{cp /etc/X11/xinit/xinitrc /home/areo/.xinitrc}
+    \item \inlinebox{nvim ~/.xinitrc}: write \inlinebox{exex i3} or \inlinebox{exec xfce4-session} in there
+    \item \inlinebox{startx} to start
+    \item \inlinebox{xrandr} to show all available screen resolutions and then e.g. \inlinebox{xrandr -s 1920x780}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Start DE directly after login or set up a display manager (login screen)}
+  \begin{itemize}
+    \item \inlinebox{~/.zshrc} or \inlinebox{~/.bash_profile}:
+      \begin{terminal}[minted language=bash]
+        if [[ "$(tty)" = "/dev/tty1" ]]; then
+          pgrep || startx
+        fi
+      \end{terminal}
+    \item \alert{displaymanager:}
+      \begin{itemize}
+        \item \inlinebox{sudo pacman -S lightdm lightdm-gtk-greeter}
+        \item \inlinebox{sudo systemctl enable lightdm.service}: systemd command to tell systemd to start lightdm when one does log in
+        \item useful to be able to choose between differnt desktop environments
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Compiling yay (make arch package)}
+  \begin{itemize}
+    \item \inlinebox{git clone https://aur.archlinux.org/yay-git.git}
+    \item \inlinebox{cd yay-git} and then \inlinebox{makepkg -si}
+      \begin{itemize}
+        \item \inlinebox{base-devel} needed for it
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Arch in Virtualbox (in case)}
+  \begin{itemize}
+    \item \inlinebox{pacman -S virtualbox-guest-utils xf86-video-vmware}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Wifi}
+  \begin{itemize}
+    \item NetworkManager manages everything ones it is activated (ethernet an wifi)
+      \item \inlinebox{wifi-menu} doesn't work once the NetworkManager is activated or if there's already a ethernet connection
+    \item \inlinebox{nmcli device wifi list}
+    \item {\tiny \inlinebox{nmcli device wifi connect 'FRITZ!Box Gastzugang Herbert' password PASSWORD}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{CPU/GPU}
+  \begin{itemize}
+    \item \inlinebox{pacman -S amd-ucode} or \inlinebox{pacman -S intel-ucode}
+    \item \inlinebox{pacman -S xf86-video-intel}
+    \item \inlinebox{pacman -S mesa} (if intel or amd for graphics) or \inlinebox{pacman -S nvidea nvidea-utils} (nvideo for graphics) and \inlinebox{pacman -S nvidea-lts} (if one installed the lts-kernel)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Right Keyboard Layout in Xorg\vspace{0.5cm}}
+  \begin{itemize}
+    \item for xorg the keyboard layout isn't related to the keyboard layout in the tty with it's file: \inlinebox{/etc/vconsole.conf} but has to be configured in e.g. \inlinebox{/etc/X11/xorg.conf.d/00-keyboard.conf} (one of many keyboard layouts for xorg)
+      \begin{itemize}
+        \item xorg.conf is parsed by the X server at start-up. To apply changes, restart X
+      \end{itemize}
+    \item \alert{get overview:}
+      \begin{terminal}[minted language=bash]
+        localectl list\itemx11-keymap-models
+        localectl list\itemx11-keymap-layouts
+        localectl list\itemx11-keymap-variants [layout] (e.g. de)
+        localectl list\itemx11-keymap-options
+      \end{terminal}
+  \item set one for the current session: \inlinebox{sudo setxkbmap de nodeadkeys} or \inlinebox{sudo setxkbmap -layout de -variant nodeadkeys} (long variant)
+    \begin{itemize}
+      \item {\tiny \inlinebox{setxkbmap [-model xkb_model] [-layout xkb_layout] [-variant xkb_variant] [-option xkb_options]}}
+      \item or persistent in \inlinebox{~/.xinitrc}
+    \end{itemize}
+  \item make persistent in \inlinebox{/etc/X11/xorg.conf.d}:
+    \begin{itemize}
+      \item \inlinebox{localectl set-x11-keymap de "" nodeadkeys ""}: autogenerates the keyboard layout file
+      \item {\tiny \inlinebox{localectl [--no-convert] set-x11-keymap layout [model [variant [options]]]}}
+      \item if \inlinebox{--no-convert} option is passed, the specified keymap is also converted to the closest matching console keymap and applied to the console configuration in \inlinebox{vconsole.conf}
+      \item to set a model, variant or options, all preceding fields need to be specified, but the preceding fields can be skipped by passing an empty string with ""
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Desktop Background}
+  \begin{itemize}
+    \item {\tiny \inlinebox{feh --bg-scale "/home/areo/Pictures/Wallpaper/linux wallpaper/urban-1597922375998-8560.jpg"}}
+    \begin{itemize}
+      \item best into \inlinebox{~/.xinitrc}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Sound}
+  \begin{itemize}
+    \item \inlinebox{sudo pacman -S pulseaudio}
+    \item \inlinebox{/usr/bin/start-pulseaudio-x11}
+    \begin{itemize}
+      \item best into \inlinebox{~/.xinitrc}
+    \end{itemize}
+    \item \inlinebox{pavucontrol} is a gui to have an overview
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Compositor}
+  \begin{itemize}
+    \item \inlinebox{picom &}
+      \begin{itemize}
+        \item best into \inlinebox{~/.xinitrc}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Screen-Brightness}
+  \begin{itemize}
+    \item \inlinebox{sys/class/backlight}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Screenshot}
+  \begin{itemize}
+    \item \inlinebox{scrot} ($\rightarrow$ configuration in \inlinebox{~/.config/i3/config} file)
+  \end{itemize}
+\end{frame}

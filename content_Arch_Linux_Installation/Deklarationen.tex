@@ -1,4 +1,4 @@
-%!Tex Root = ../Vorlage_Praesentation.tex
+%!Tex Root = ../content_Arch_Linux_Installation.tex
 % ./content_Arch_Linux_Installation/Packete
 % ./content_Arch_Linux_Installation/Design
 % ./content_Arch_Linux_Installation/Before_Installation
@@ -51,8 +51,8 @@
 
 \newtcolorbox{file}[1][]{enhanced, hbox, notitle, interior style={fill=PrimaryColor}, frame empty, halign=center, fontupper=\color{white}\tiny, #1,drop fuzzy shadow,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,boxrule=0.5mm,listing engine=minted,minted style=colorful}
 
-\newtcblisting{terminal}{
-enhanced,colframe=PrimaryColor,colback=BoxColor,hbox,listing only,halign title=center,minted language=text,drop fuzzy shadow,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,boxrule=0.5mm,listing engine=minted,minted style=colorful,minted options={}}
+\newtcblisting{terminal}[1][]{%
+enhanced,colframe=PrimaryColor,colback=BoxColor,hbox,listing only,halign title=center,minted language=text,drop fuzzy shadow,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,boxrule=0.5mm,listing engine=minted,minted style=colorful,#1,minted options={}}
 
 % % https://tex.stackexchange.com/questions/593218/nested-inline-math-for-new-command-with-argument
 \newcommand{\prompt}{\textcolor{SecondaryColor}{\setBold >\;\ignorespaces}}
@@ -69,11 +69,11 @@ enhanced,colframe=PrimaryColor,colback=BoxColor,hbox,listing only,halign title=c
 {verbatim,colback=SecondaryColorDimmed,colframe=SecondaryColor}
 {$\mathtt{#1}$}
 
-\newtcolorbox{Sidenote}{enhanced, breakable, sharpish corners, notitle, arc=0mm, left=3mm, right=3mm, boxrule=1mm, borderline vertical={1mm}{0pt}{PrimaryColor}, title=Sidenote, attach boxed title to top text left={yshift=-1.1mm},
+\newtcolorbox{Sidenote}{enhanced,breakable,drop fuzzy shadow,sharpish corners, notitle,arc=0mm,left=3mm,right=3mm,boxrule=1mm, borderline vertical={1mm}{0pt}{PrimaryColor},title=Sidenote,attach boxed title to top text left={yshift=0mm},
 interior style={fill=BoxColor},
-frame style={color=white},
+frame style={color=BoxColor},
 % https://tex.stackexchange.com/questions/459870/paragraph-breaks-inside-tcolorbox, maybe also parbox=false
-boxed title style={arc=0mm, skin=enhancedfirst jigsaw, frame empty, colback=PrimaryColor, bottom=-0.5mm},
+boxed title style={arc=0mm,skin=enhancedfirst jigsaw,frame empty,colback=PrimaryColor,boxrule=0mm,bottom=-0.4mm},
 after title={\hspace{0.2cm}\includegraphics[height=3mm]{./figures/lupe.png}}
 }
 % before upper=\setlength{\parskip}{1em},

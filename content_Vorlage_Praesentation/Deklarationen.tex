@@ -67,11 +67,11 @@ enhanced,colframe=PrimaryColor,colback=BoxColor,hbox,listing only,halign title=c
 {verbatim,colback=SecondaryColorDimmed,colframe=SecondaryColor}
 {$\mathtt{#1}$}
 
-\newtcolorbox{Sidenote}{enhanced, breakable, sharpish corners, notitle, arc=0mm, left=3mm, right=3mm, boxrule=1mm, borderline vertical={1mm}{0pt}{PrimaryColor}, title=Sidenote, attach boxed title to top text left={yshift=-1.1mm},
+\newtcolorbox{Sidenote}{enhanced,breakable,drop fuzzy shadow,sharpish corners, notitle,arc=0mm,left=3mm,right=3mm,boxrule=1mm, borderline vertical={1mm}{0pt}{PrimaryColor},title=Sidenote,attach boxed title to top text left={yshift=0mm},
 interior style={fill=BoxColor},
-frame style={color=white},
+frame style={color=BoxColor},
 % https://tex.stackexchange.com/questions/459870/paragraph-breaks-inside-tcolorbox, maybe also parbox=false
-boxed title style={arc=0mm, skin=enhancedfirst jigsaw, frame empty, colback=PrimaryColor, bottom=-0.5mm},
+boxed title style={arc=0mm,skin=enhancedfirst jigsaw,frame empty,colback=PrimaryColor,boxrule=0mm,bottom=-0.4mm},
 after title={\hspace{0.2cm}\includegraphics[height=3mm]{./figures/lupe.png}}
 }
 % before upper=\setlength{\parskip}{1em},

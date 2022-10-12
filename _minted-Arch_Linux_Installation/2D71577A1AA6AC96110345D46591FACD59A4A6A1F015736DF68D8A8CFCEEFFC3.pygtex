@@ -1,0 +1,6 @@
+\begin{BVerbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+localectl list\PYG{l+s+se}{\PYGZbs{}i}temx11\PYGZhy{}keymap\PYGZhy{}models
+localectl list\PYG{l+s+se}{\PYGZbs{}i}temx11\PYGZhy{}keymap\PYGZhy{}layouts
+localectl list\PYG{l+s+se}{\PYGZbs{}i}temx11\PYGZhy{}keymap\PYGZhy{}variants \PYG{o}{[}layout\PYG{o}{]} \PYG{o}{(}e.g. de\PYG{o}{)}
+localectl list\PYG{l+s+se}{\PYGZbs{}i}temx11\PYGZhy{}keymap\PYGZhy{}options
+\end{BVerbatim}

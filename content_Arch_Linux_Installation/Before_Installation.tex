@@ -7,24 +7,16 @@
 
 \section{Before Installation}
 
-\begin{frame}{Before Installation - 1}
+\begin{frame}[allowframebreaks]{Before Installation - 1}
   \begin{itemize}
     \item in der UEFI firmware fast-boot auf [Disabled] setzen.
     \item \enquote{Schnellstart} in Windows deaktivieren, da die EFI Systempartition beschädigt werden kannn.
       \begin{enumerate}
         \item Windows-Taste + X drücken / Systemsteuerung starten.
         \item Hier nun System und Sicherheit / Energieoptionen starten.
-        \item  Links nun \enquote{Auswählen, was beim Drücken des Netzschalters geschehen soll} anklicken.
-        \item  Im neuen Fenster nun oben auf: Einige Einstellungen sind momentan nicht verfügbar anklicken.
-      \end{enumerate}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Before Installation - 2}
-  \begin{itemize}
-    \item \enquote{Schnellstart} in Windows deaktivieren, da die EFI Systempartition beschädigt werden kannn.
-      \begin{enumerate}
-        \item[5.] Nun wird unten bei \enquote{Einstellungen für das Herunterfahren} der Haken bei Schnellstart aktivieren (Empfohlen) anklickbar. Nun kann man den Haken entweder entfernen oder setzen.
+        \item Links nun \enquote{Auswählen, was beim Drücken des Netzschalters geschehen soll} anklicken.
+        \item Im neuen Fenster nun oben auf: Einige Einstellungen sind momentan nicht verfügbar anklicken.
+        \item Nun wird unten bei \enquote{Einstellungen für das Herunterfahren} der Haken bei Schnellstart aktivieren (Empfohlen) anklickbar. Nun kann man den Haken entweder entfernen oder setzen.
       \end{enumerate}
     \item use Belena Etcher (`sudo balena-etcher-electron`) to put the `.iso` on a usb-device, then go into UEFI firmware settings (start with e.g. f2 during system start, `systemctl reboot --firmware-setup` or select it in GRUB with the option `UEFI firmware settings`) and change the bootorder to have the usb-device having a higher boot priority then the esp partition with it's bootloader that is usually loaded.
     \item maybe disable secure boot
