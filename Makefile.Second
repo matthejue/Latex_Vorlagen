@@ -80,7 +80,6 @@ clean:
 	-rm -r *.snm
 	-rm -r *.nav
 
-
 .PHONY: cleanall
 cleanall: clean
 	-rm -f *.pdf

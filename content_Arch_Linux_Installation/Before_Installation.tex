@@ -7,7 +7,7 @@
 
 \section{Before Installation}
 
-\begin{frame}[allowframebreaks]{Before Installation - 1}
+\begin{frame}[fragile, allowframebreaks]{Before Installation}
   \begin{itemize}
     \item in der UEFI firmware fast-boot auf [Disabled] setzen.
     \item \enquote{Schnellstart} in Windows deaktivieren, da die EFI Systempartition beschädigt werden kannn.
@@ -18,7 +18,64 @@
         \item Im neuen Fenster nun oben auf: Einige Einstellungen sind momentan nicht verfügbar anklicken.
         \item Nun wird unten bei \enquote{Einstellungen für das Herunterfahren} der Haken bei Schnellstart aktivieren (Empfohlen) anklickbar. Nun kann man den Haken entweder entfernen oder setzen.
       \end{enumerate}
-    \item use Belena Etcher (`sudo balena-etcher-electron`) to put the `.iso` on a usb-device, then go into UEFI firmware settings (start with e.g. f2 during system start, `systemctl reboot --firmware-setup` or select it in GRUB with the option `UEFI firmware settings`) and change the bootorder to have the usb-device having a higher boot priority then the esp partition with it's bootloader that is usually loaded.
+    \item use Belena Etcher (\inlinebox{sudo balena-etcher-electron}) to put the \inlinebox{.iso} on a usb-device, then go into UEFI firmware settings (start with e.g. f2 during system start, \inlinebox{systemctl reboot --firmware-setup} or select it in GRUB with the option \inlinebox{UEFI firmware settings}) and change the bootorder to have the usb-device having a higher boot priority then the esp partition with it's bootloader that is usually loaded.
     \item maybe disable secure boot
   \end{itemize}
 \end{frame}
+
+\begin{frame}[fragile, allowframebreaks]{Create Installmedia}
+  \begin{itemize}
+    \item \alert{on Linux:} Balena-Etcher, easiest way to download AppImage und use AppimageManager.
+      % \item Poolkit Gnome vielleicht erwähnen
+    \item \alert{on Windows:} Rufus.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Start UEFI with boot key}
+  \begin{itemize}
+    \item \aalert{Dell:} \key{F2} or \key{F12}.
+    \item \aalert{HP:} \key{ESC} or \key{F10}.
+    \item \aalert{Acer:} \key{F2} or \key{Delete}.
+    \item \aalert{ASUS:} \key{F2} or \key{Delete}.
+    \item \aalert{Lenovo:} \key{F1} or \key{F2}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks]{Start UEFI from Windows}
+  \begin{itemize}
+    \item Settings $\Rightarrow$ Update \& Security $\Rightarrow$ Recovery $\Rightarrow$ Restart Now $\Rightarrow$ Troubleshoot Advanced Options $\Rightarrow$ UEFI Firmware Settings $\Rightarrow$ Restart.
+  \end{itemize}
+  % https://www.windowscentral.com/how-enter-uefi-bios-windows-10-pcs
+\end{frame}
+%
+\begin{frame}[fragile]{Start UEFI from Linux}
+  \begin{itemize}
+    \item \inlinebox{systemctl reboot --firmware-setup}.
+  \end{itemize}
+  % https://superuser.com/questions/519718/linux-on-uefi-how-to-reboot-to-the-uefi-setup-screen-like-windows-8-can
+\end{frame}
+
+\begin{frame}[fragile]{Windows Partitionierung}
+  \begin{itemize}
+    \item asdf
+  \end{itemize}
+  % https://medium.com/linuxforeveryone/how-to-install-ubuntu-20-04-and-dual-boot-alongside-windows-10-323a85271a73
+\end{frame}
+
+\begin{frame}[fragile]{Größen von Partitionen durch 10 ganzzahlig teilbar}
+  \begin{itemize}
+    \item asdf
+  \end{itemize}
+\end{frame}
+
+\section{Ubuntu Base Installation}
+
+\begin{frame}[fragile]{Ubuntu Manuelle Partitionierung}
+  \begin{itemize}
+    \item
+  \end{itemize}
+  % https://medium.com/linuxforeveryone/how-to-install-ubuntu-20-04-and-dual-boot-alongside-windows-10-323a85271a73
+\end{frame}
+
+% später noch über Polkit Terminal und Graphical sprechen
+% später noch wie Lan aktivieren

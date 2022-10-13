@@ -5,11 +5,12 @@
 % ./content_Arch_Linux_Installation/Before_Installation
 % ./content_Arch_Linux_Installation/After_Base_Installation
 
-\section{Base Installation}
+\section{Arch Linux Base Installation}
 
-\begin{frame}[fragile]{Official Installation Guide}
+\begin{frame}[fragile]{Nützliche Webseiten}
   \begin{itemize}
-    \item \url{https://wiki.archlinux.org/title/Installation_guide}.
+    \item \alert{Official Installation Guide:} \url{https://wiki.archlinux.org/title/Installation_guide}.
+    \item \alert{Wichtige Meldungen:} \url{https://archlinux.org/}
   \end{itemize}
 \end{frame}
 
@@ -192,7 +193,7 @@
         \item find out if it's installed with \inlinebox{which sudo}
         \item else \inlinebox{pacman -S which sudo} or just directly \inlinebox{pacman -S base-devel}
       \end{itemize}
-    \item \inlinebox{EDITOR=nvim visudo} to edit sudoers file in nvim and uncomment \inlinebox{%whell ALL=(ALL) ALL}
+    \item \inlinebox{EDITOR=nvim visudo} to edit sudoers file in nvim and uncomment \inlinebox{%wheel ALL=(ALL) ALL}
     \item
   \end{itemize}
     \begin{Sidenote}
