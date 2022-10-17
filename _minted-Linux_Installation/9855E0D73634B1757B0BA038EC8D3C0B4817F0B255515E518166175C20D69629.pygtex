@@ -1,0 +1,8 @@
+\begin{BVerbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{c+c1}{\PYGZsh{} boot.loader.systemd\PYGZhy{}boot.enable = true;}
+boot\PYG{o}{.}loader\PYG{o}{.}efi\PYG{o}{.}\PYG{l+s+ss}{canTouchEfiVariables =} \PYG{n+no}{true}\PYG{p}{;}
+boot\PYG{o}{.}loader\PYG{o}{.}grub\PYG{o}{.}\PYG{l+s+ss}{enable =} \PYG{n+no}{true}\PYG{p}{;}
+boot\PYG{o}{.}loader\PYG{o}{.}grub\PYG{o}{.}\PYG{l+s+ss}{devices =} \PYG{p}{[} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{n}\PYG{l+s+s2}{o}\PYG{l+s+s2}{d}\PYG{l+s+s2}{e}\PYG{l+s+s2}{v}\PYG{l+s+s2}{\PYGZdq{}} \PYG{p}{]}\PYG{p}{;}
+boot\PYG{o}{.}loader\PYG{o}{.}grub\PYG{o}{.}\PYG{l+s+ss}{efiSupport =} \PYG{n+no}{true}\PYG{p}{;}
+boot\PYG{o}{.}loader\PYG{o}{.}grub\PYG{o}{.}\PYG{l+s+ss}{use0SProber =} \PYG{n+no}{true}\PYG{p}{;}
+\end{BVerbatim}

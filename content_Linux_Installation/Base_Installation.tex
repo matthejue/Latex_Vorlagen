@@ -1,9 +1,18 @@
-%!Tex Root = ../Arch_Linux_Installation.tex
-% ./content_Arch_Linux_Installation/Packete
-% ./content_Arch_Linux_Installation/Design
-% ./content_Arch_Linux_Installation/Deklarationen
-% ./content_Arch_Linux_Installation/Before_Installation
-% ./content_Arch_Linux_Installation/After_Base_Installation
+%!Tex Root = ../Linux_Installation.tex
+% ./content_Linux_Installation/Packete
+% ./content_Linux_Installation/Design
+% ./content_Linux_Installation/Deklarationen
+% ./content_Linux_Installation/Before_Installation
+% ./content_Linux_Installation/After_Base_Installation
+
+\section{Ubuntu Base Installation}
+
+\begin{frame}[fragile]{Ubuntu Manuelle Partitionierung}
+  \begin{itemize}
+    \item
+  \end{itemize}
+  % https://medium.com/linuxforeveryone/how-to-install-ubuntu-20-04-and-dual-boot-alongside-windows-10-323a85271a73
+\end{frame}
 
 \section{Arch Linux Base Installation}
 
@@ -297,5 +306,25 @@
       \item \inlinebox{umount -l /mnt} (to force unmount) or \inlinebox{umount -a}
     \item \inlinebox{poweroff} (not \inlinebox{reboot} to remove the iso from storage in virtualbox)
     \item in the UFEI firmware settings   choose the right bootloader for the esp on which the bootloader was installed (maybe secure boot has to be enabled for this) and give the esp with the bootloader the highest boot priority
+  \end{itemize}
+\end{frame}
+
+\section{NixOs Base Installation}
+
+\begin{frame}[fragile]{Dualbooting with Windows 11}
+  \centering
+  \begin{terminal}[minted language=nix]
+    # boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.grub.enable = true;
+    boot.loader.grub.devices = [ "nodev" ];
+    boot.loader.grub.efiSupport = true;
+    boot.loader.grub.use0SProber = true;
+  \end{terminal}
+\end{frame}
+
+\begin{frame}[fragile]{Labeling}
+  \begin{itemize}
+    \item \url{https://wiki.archlinux.org/title/Persistent_block_device_naming}
   \end{itemize}
 \end{frame}

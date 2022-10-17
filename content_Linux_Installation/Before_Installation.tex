@@ -1,31 +1,34 @@
-%!Tex Root = ../Arch_Linux_Installation.tex
-% ./content_Arch_Linux_Installation/Packete
-% ./content_Arch_Linux_Installation/Design
-% ./content_Arch_Linux_Installation/Deklarationen
-% ./content_Arch_Linux_Installation/Base_Installation
-% ./content_Arch_Linux_Installation/After_Base_Installation
+%!Tex Root = ../Linux_Installation.tex
+% ./content_Linux_Installation/Packete
+% ./content_Linux_Installation/Design
+% ./content_Linux_Installation/Deklarationen
+% ./content_Linux_Installation/Base_Installation
+% ./content_Linux_Installation/After_Base_Installation
 
 \section{Before Installation}
 
-\begin{frame}[fragile, allowframebreaks]{Before Installation}
+\begin{frame}[fragile, allowframebreaks]{Security Measures}
   \begin{itemize}
-    \item in der UEFI firmware fast-boot auf [Disabled] setzen.
-    \item \enquote{Schnellstart} in Windows deaktivieren, da die EFI Systempartition beschädigt werden kannn.
+    \item in der UEFI firmware \alert{fast-boot} auf [Disabled] setzen.
+    \item \alert{Schnellstart} in Windows deaktivieren, da die EFI Systempartition beschädigt werden kannn.
       \begin{enumerate}
         \item Windows-Taste + X drücken / Systemsteuerung starten.
         \item Hier nun System und Sicherheit / Energieoptionen starten.
         \item Links nun \enquote{Auswählen, was beim Drücken des Netzschalters geschehen soll} anklicken.
         \item Im neuen Fenster nun oben auf: Einige Einstellungen sind momentan nicht verfügbar anklicken.
-        \item Nun wird unten bei \enquote{Einstellungen für das Herunterfahren} der Haken bei Schnellstart aktivieren (Empfohlen) anklickbar. Nun kann man den Haken entweder entfernen oder setzen.
+        \item Nun wird unten bei \enquote{Einstellungen für das Herunterfahren} der Haken bei \alert{Schnellstart aktivieren} (Empfohlen) anklickbar. Nun den Haken entfernen.
       \end{enumerate}
-    \item use Belena Etcher (\inlinebox{sudo balena-etcher-electron}) to put the \inlinebox{.iso} on a usb-device, then go into UEFI firmware settings (start with e.g. f2 during system start, \inlinebox{systemctl reboot --firmware-setup} or select it in GRUB with the option \inlinebox{UEFI firmware settings}) and change the bootorder to have the usb-device having a higher boot priority then the esp partition with it's bootloader that is usually loaded.
-    \item maybe disable secure boot
+    \item depending whether the os supports it or not, disable \alert{secure boot}
   \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile, allowframebreaks]{Create Installmedia}
   \begin{itemize}
     \item \alert{on Linux:} Balena-Etcher, easiest way to download AppImage und use AppimageManager.
+      \begin{itemize}
+        \item poltik
+        \item in uefi change the bootorder sucht that the usb-device has a higher boot
+      \end{itemize}
       % \item Poolkit Gnome vielleicht erwähnen
     \item \alert{on Windows:} Rufus.
   \end{itemize}
@@ -55,26 +58,22 @@
   % https://superuser.com/questions/519718/linux-on-uefi-how-to-reboot-to-the-uefi-setup-screen-like-windows-8-can
 \end{frame}
 
-\begin{frame}[fragile]{Windows Partitionierung}
+\begin{frame}[fragile, allowframebreaks]{Windows Shrink Partition}
   \begin{itemize}
-    \item asdf
+    \item Search \enquote{Create and format hard disk partitions} $\Rightarrow$ Rightclick on partition $\Rightarrow$ Shrink Volume $\Rightarrow$ Enter the amount of space to shrink in MB.
+    \item Windows needs for partition: Recovery, System, MSR (Reserved) EFI, Windows, Primary, Recovery
   \end{itemize}
+  \begin{Sidenote}
+     Every time Windows upgrades to a new version (twice per year as of 2020), the upgrade process will evaluate the empty space in your Recovery Partition and determine if there is enough space for it to add the new recovery files.  If there is not enough free space the Window 10 upgrade process will automatically shrink your Primary Partition, create a new Recovery Partition and add its files there.
   % https://medium.com/linuxforeveryone/how-to-install-ubuntu-20-04-and-dual-boot-alongside-windows-10-323a85271a73
+  % https://www.urtech.ca/2020/07/solved-windows-10-hard-drive-partitions-explained-in-simple-terms/
+  \end{Sidenote}
 \end{frame}
 
 \begin{frame}[fragile]{Größen von Partitionen durch 10 ganzzahlig teilbar}
   \begin{itemize}
     \item asdf
   \end{itemize}
-\end{frame}
-
-\section{Ubuntu Base Installation}
-
-\begin{frame}[fragile]{Ubuntu Manuelle Partitionierung}
-  \begin{itemize}
-    \item
-  \end{itemize}
-  % https://medium.com/linuxforeveryone/how-to-install-ubuntu-20-04-and-dual-boot-alongside-windows-10-323a85271a73
 \end{frame}
 
 % später noch über Polkit Terminal und Graphical sprechen: https://wiki.archlinux.org/title/Polkit
