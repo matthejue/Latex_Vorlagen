@@ -1,8 +1,0 @@
-\begin{BVerbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
-\PYGZsh{} blablabla
-\PYGZsh{} blablabla
-
-127.0.0.1 localhost
-::1 localhost
-127.0.1.1 ArchPC.localdomain ArchPC
-\end{BVerbatim}

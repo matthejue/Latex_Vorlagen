@@ -1,5 +1,0 @@
-\begin{BVerbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
-\PYG{k}{if} \PYG{o}{[}\PYG{o}{[} \PYG{l+s+s2}{\PYGZdq{}}\PYG{k}{\PYGZdl{}(}tty\PYG{k}{)}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}/dev/tty1\PYGZdq{}} \PYG{o}{]}\PYG{o}{]}\PYG{p}{;} \PYG{k}{then}
-  pgrep  startx
-\PYG{k}{fi}
-\end{BVerbatim}

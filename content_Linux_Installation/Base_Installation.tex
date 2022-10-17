@@ -321,10 +321,22 @@
     boot.loader.grub.efiSupport = true;
     boot.loader.grub.use0SProber = true;
   \end{terminal}
+  \begin{itemize}
+  \item \url{https://www.youtube.com/watch?v=82vrj22omyQ&list=PLXJMLVnWDKP0KQc1kbGbgyCz90yuecKKm&index=2&t=319s}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Labeling}
   \begin{itemize}
+    \item \inlinebox*{e2label /dev/XXX "new label"}
+    \item \inlinebox*{swaplabel -L "new label" /dev/XXX}
+    \item \inlinebox*{fatlabel /dev/XXX "new label"}
     \item \url{https://wiki.archlinux.org/title/Persistent_block_device_naming}
   \end{itemize}
 \end{frame}
+
+% \begin{frame}[fragile]{}{}
+%   \begin{itemize}
+%
+%   \end{itemize}
+% \end{frame}
