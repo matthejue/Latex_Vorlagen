@@ -1,0 +1,129 @@
+%!Tex Root = ../Vorlage_Praesentation.tex
+% ./Packete.tex
+% ./Design.tex
+% ./Deklarationen.tex
+% ./Kapitel1.tex
+% ./Kapitel2.tex
+
+\if\hide0\section{Kapitel 3}\fi
+
+\begin{frame}[fragile, label={kapitel3}]{Kapitel 3}{Beispiele für Codeboxen}
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+      \codebox[title=Codebeispiel, remember as=codebeispiel1, minted language=c, minted options={highlightlines={1,3-7}}]{./code_examples/example.c}
+    \end{column}
+    \hfill
+    \begin{column}{0.4\textwidth}
+      \begin{linenums}
+        \numberedcodebox[remember as=codebeispiel2, minted language=c, minted options={}]{./code_examples/example.c}
+      \end{linenums}
+    \end{column}
+  \end{columns}
+  \begin{tikzpicture}[overlay,remember picture,line width=1mm, font=\small, draw=SecondaryColor]
+    \draw[->] (codebeispiel1.east) to[bend left] node[above, align=center] {Mehrzeiliger\\ Text} (codebeispiel2.west);
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{Kapitel 3}{Beispiele für Inline Boxen}
+  \begin{itemize}
+      \item \inlinebox{arg} aus \inlinebox*{command arg}.
+      \aitem \key{\Uparrow-Tab}.
+      \item longline longline longline longline longline longline longline longline longline longline longline longline.
+      \begin{itemize}
+        \item longline longline longline longline longline longline longline longline longline longline longline longline.
+        \grayitem \textcolor{gray!90!black}{test test test.}
+      \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Kapitel 3}{Beispiele Listen und Nummerierung}
+  \begin{enumerate}
+    \item asdf
+    \item asdf
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{Kapitel 3}{Beispiel für hierarchisch aufgebaute Codebeispiele}
+  \centering
+  \begin{file}[remember as=input]
+    Start
+  \end{file}
+  \vspace{0.1cm}
+  \begin{codeframe}*[remember as=frameone]{Frame 1}
+    \codebox[title=Codebeispiel 1, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=A, minted options={highlightlines={2}}]{./code_examples/example2.special}
+    \hfill
+    \codebox*[title=Codebeispiel 2, width=0.4\linewidth, nobeforeafter, minted language=text, equal height group=A, minted options={highlightlines={3}}]{./code_examples/example2.special}
+  \end{codeframe}
+  \vspace{0.1cm}
+  \begin{file}[remember as=conta]
+    ...
+  \end{file}
+  \begin{tikzpicture}[overlay,remember picture,line width=1mm,draw=PrimaryColor, font=\tiny]
+    \draw[->, color=SecondaryColor] (input.south) to node[right=0.25cm, align=center] {\textcolor{black}{Verbindung 1}} (frameone.north);
+    \draw[->] (frameone.south) to node[right=0.25cm, align=center] {Verbindung 2} (conta.north);
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]{Kapitel 3}{Beispiel für Terminal}
+  \centering
+  \begin{terminal}
+    |\prompt| command arg
+    |\customprompt| command arg
+  \end{terminal}
+  %   % |\prompt|
+\end{frame}
+
+\begin{frame}{Kapitel 3}{Beispiel für Anmerkung}
+  \begin{Sidenote}
+    \begin{itemize}
+      \item test
+      \item test2
+    \end{itemize}
+  \end{Sidenote}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Kapitel 3}{Beispiel für Frameoptionen}
+  \lipsum[1]
+  \lipsum[2]
+\end{frame}
+
+\begin{frame}[shrink]{Kapitel 3}{Beispiel für Frameoptionen}
+  \vspace{0.5cm}
+  \lipsum[1-2]
+  \vspace{0.5cm}
+\end{frame}
+
+% https://tex.stackexchange.com/questions/9889/positioning-content-at-the-top-of-a-beamer-slide-by-default
+\begin{frame}[t]{Text nach oben verschieben}
+  \begin{columns}
+    \begin{column}[t]{0.5\textwidth}
+      \begin{itemize}
+        \item test 1
+        \item test 2
+      \end{itemize}
+    \end{column}
+    \begin{column}[t]{0.5\textwidth}
+      \begin{itemize}
+        \item test 1
+        \item test 2
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Text zentriert (default)}
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item test 1
+        \item test 2
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{itemize}
+        \item test 1
+        \item test 2
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}

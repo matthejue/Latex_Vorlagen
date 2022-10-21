@@ -7,44 +7,104 @@
   ./content_Vorlage_Uebungsblatt/Kapitel2,
 }
 
-\def\hide{0}
+\def\thesis{1}
 
 \begin{document}
+  \sloppy
 
-\begin{withoutheadline}
-  \begin{withoutfootline}
-    \begin{frame}
-      \titlepagesecond
-    \end{frame}
-  \end{withoutfootline}
+  \pagestyle{empty}
 
-  \begin{frame}{Gliederung}
-    \tableofcontents[hideallsubsections]
-  \end{frame}
-\end{withoutheadline}
+  \input{./content_Vorlage_Uebungsblatt/Titlepage}
+  \setlength{\footskip}{30pt}
+  % \includepdf[pages=-]{./file.pdf}
 
-\include{./content_Vorlage_Uebungsblatt/Kapitel1}
-\include{./content_Vorlage_Uebungsblatt/Kapitel2}
+  \tableofcontents
 
-\section{Literatur}
+  % https://www.overleaf.com/learn/latex/Page_numbering
+  \clearpage
+  \pagenumbering{Roman}
+  % \setcounter{page}{0}
 
-\begin{frame}{Bücher}
+  \newplain
+  \pagestyle{bib}
+
+  \listoffigures
+  \listofcodecaptions
+  \listoftables
+  \listof{floatgrammar}{Grammatikverzeichnis}
+
+%   \newtcolorbox{Special_Paragraph}{enhanced, breakable, sharpish corners, notitle, arc=0mm, left=3mm, right=3mm, boxrule=1mm, borderline vertical={1mm}{0pt}{PrimaryColor}, title=Anmerkung, attach boxed title to top text left={yshift=-1.1mm}, fonttitle=\bfseries,
+%   interior style={fill=SecondaryColor},
+%   frame style={color=white},
+%   % https://tex.stackexchange.com/questions/459870/paragraph-breaks-inside-tcolorbox, maybe also parbox=false
+%   before upper=\setlength{\parskip}{1em},
+%   boxed title style={arc=0mm, skin=enhancedfirst jigsaw, frame empty, colback=PrimaryColor, bottom=-0.5mm},
+%   after title={\hspace{0.2cm}\includegraphics[height=3mm]{./figures/lupe.png}}
+%   % overlay={\node[anchor=north west] (myicon) at ([shift={(2.9cm,0.6cm)}]frame.north west) {\includegraphics[height=5mm]{./figures/note.png}};}
+%   }
+%
+%   % https://tex.stackexchange.com/questions/319355/tcolorbox-breakable-option-not-working
+%   \newtcbinputlisting{\codebox}[2][]{
+%   listing file={#2},
+%   enhanced, colframe=PrimaryColor,colback=SecondaryColor, fonttitle=\bfseries, arc=0mm, bottom=1mm, top=1mm, left=1mm, right=1mm, #1, listing only, listing engine=minted, minted style=colorful, halign title=center, sharpish corners, drop fuzzy shadow, minted options={fontsize=\small,linenos=false,breaklines,breakafter={_}, breakbefore={(}, breakaftersymbolpre={}, breakaftersymbolpost={}, breakbeforesymbolpre={}, breakbeforesymbolpost={}, breaksymbolsepleft=2mm, breaksymbolsepright=0mm, breakindent=0mm, breaksymbolindentleft=5mm, breaksymbolindentright=0mm, numbersep=0mm, escapeinside=||}
+%   }
+% % drop fuzzy shadow, drop lifted shadow, listing engine=listings
+%
+%   \newtcblisting{terminal}{
+%   enhanced, colframe=PrimaryColor,colback=SecondaryColor, hbox, fonttitle=\bfseries, arc=0mm, bottom=1mm, top=1mm, left=1mm, right=1mm, listing only, listing engine=minted, halign title=center, sharpish corners, drop fuzzy shadow, minted language=text, minted options={fontsize=\small,linenos=false,breaklines,breakafter={_}, breakbefore={(}, breakaftersymbolpre={}, breakaftersymbolpost={}, breakbeforesymbolpre={}, breakbeforesymbolpost={}, breaksymbolsepleft=2mm, breaksymbolsepright=0mm, breakindent=0mm, breaksymbolindentleft=5mm, breaksymbolindentright=0mm, numbersep=0mm, escapeinside=||}
+%   }
+%
+%   \newtcblisting{error}[1][]{%
+%     enhanced,colframe=PrimaryColor,colback=white, fonttitle=\bfseries, arc=0mm, listing only, listing engine=minted, halign title=center, sharpish corners, drop fuzzy shadow, minted language=text, minted style=colorful, overlay={\begin{tcbclipinterior}\fill[PrimaryColor] (frame.south west) rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}},#1}
+%
+%   \newtcolorbox{Code_Frame}[2][]{enhanced, sharpish corners, drop fuzzy shadow, arc=0mm, bottom=1mm, top=1mm, left=1mm, right=1mm, boxrule=1mm, halign title=center, fonttitle=\bfseries, interior style={fill=white}, frame style={color=PrimaryColor}, title={#2}, #1}
+%
+%   % https://tex.stackexchange.com/questions/616575/how-to-draw-tcolorbox-without-a-frame
+%   \newtcolorbox{File}[1][]{enhanced, hbox, sharpish corners, drop fuzzy shadow, arc=0mm, notitle, interior style={fill=PrimaryColor}, frame empty, halign=center, fontupper=\color{white}\bfseries, #1}
+%
+%   \newtcbinputlisting{\numberedcodebox}[2][]{
+%   listing file={#2},
+%   enhanced, breakable, colframe=PrimaryColor,colback=white, fonttitle=\bfseries, arc=0mm, #1, listing only, listing engine=minted, minted style=colorful, halign title=center, sharpish corners, drop fuzzy shadow, overlay={\begin{tcbclipinterior}\fill[PrimaryColor] (frame.south west) rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}}
+%   }
+%
+%   \DeclareTotalTCBox{\inlinebox}{ s v }
+%   {verbatim,colback=SecondaryColor,colframe=PrimaryColor}
+%   {\IfBooleanTF{#1}%
+%   {\textcolor{PrimaryColor}{\setBold >\enspace\ignorespaces}#2}%
+%   {#2}}
+%   % {verbatim,IfBooleanTF={#1}{colback=white, colframe=PrimaryColor, colupper=PrimaryColor}{colback=SecondaryColor,colframe=PrimaryColor}}
+%
+%   \DeclareTotalTCBox{\key}{ m }
+%   {verbatim,colback=SecondaryColor,colframe=PrimaryColor}
+%   {$\mathtt{#1}$}
+
+% maybe useful, add to toc: https://tex.stackexchange.com/questions/220059/list-of-figures-and-tables-not-in-contents
+% maybe useful, no numbering: https://tex.stackexchange.com/questions/28333/continuous-v-per-chapter-section-numbering-of-figures-tables-and-other-docume
+
+  \clearpage
+
+  \pagestyle{default}
+  \pagenumbering{arabic}
+
+  \include{./content_Vorlage_Uebungsblatt/Kapitel1}
+  \include{./content_Vorlage_Uebungsblatt/Kapitel2}
+
+  % \appendix
+  \clearpage
+  \pagenumbering{Alph}
+  % https://tex.stackexchange.com/questions/395856/switching-tocdepth-in-the-middle-of-a-document
+  \include{./content/Appendix}                % ./content/Appendix.tex
+
+  \pagestyle{bib}
+  % https://tex.stackexchange.com/questions/439798/how-to-include-bibliography-in-toc
+  \printbibheading[heading=bibintoc]
+  % \printbibliography[type=book,heading=subbibliography,title={Bücher}]
+  % \printbibliography[type=article,heading=subbibliography,title={Artikel}]
   \printbibliography[type=book,heading=subbibliography,title={Bücher}]
-\end{frame}
-
-\begin{frame}{Artikel}
   \printbibliography[type=article,heading=subbibliography,title={Artikel}]
-\end{frame}
-
-\begin{frame}{Vorlesungen}
-  \printbibliography[type=unpublished,heading=subbibliography,title={Vorlesungen}]
-\end{frame}
-
-\begin{frame}{Online}
   \printbibliography[type=online,heading=subbibliography,title={Online}]
-\end{frame}
-
-\begin{frame}{Sonstiges}
+  \printbibliography[type=unpublished,heading=subbibliography,title={Vorlesungen}]
   \printbibliography[nottype=book, nottype=article, nottype=online, nottype=unpublished,heading=subbibliography,keyword=wikikeyword,title={Sonstige Quellen}]
-\end{frame}
+  % ./Library.bib
 \end{document}
+

@@ -1,14 +1,12 @@
-%!Tex Root = ../Main.tex
-% ./Titlepage.tex
-% ./Motivation.tex
-% ./Einführung.tex
-% ./Implementierung1_Tables_DT_AST.tex,
-% ./Implementierung2_Pntr_Array.tex,
-% ./Implementierung3_Struct_Derived.tex,
-% ./Implementierung4_Fun.tex,
-% ./Implementierung5_Fehlermeldungen.tex,
-% ./Ergebnisse_und_Ausblick.tex
-% ./Appendix.tex
+%!Tex Root = ../Vorlage_Uebungsblatt.tex
+% ./Design.tex
+% ./Deklarationen.tex
+% ./Kapitel1.tex
+% ./Kapitel2.tex
+
+% ┌──────────┐
+% │ Packages │
+% └──────────┘
 
 % https://tex.stackexchange.com/questions/83101/option-clash-for-package-xcolor
 % [table]
@@ -46,9 +44,6 @@
 \tcbset{listing engine=minted}
 % \tcbuselibrary{raster}
 
-% https://tex.stackexchange.com/questions/345976/global-settings-for-minted
-\setminted{fontsize=\small,breaklines,autogobble,linenos,numbersep=1.25mm, highlightcolor=SecondaryColor,escapeinside=||}
-
 \usepackage{cleveref}
 
 \usepackage[style=authortitle]{biblatex}
@@ -83,29 +78,7 @@
 \usepackage{seqsplit}
 
 % https://tex.stackexchange.com/questions/153167/how-to-set-page-number-at-right-footer
-% footer
 \usepackage{fancyhdr}
-% \fancyhf{}
-% \fancyfootoffset{1cm}
-% \rfoot[]{\thepage}
-%
-% \fancypagestyle{plain}{%
-%   % on first chapter pages no rule
-%     \renewcommand{\headrulewidth}{0mm}%
-%     \fancyhf{}%
-%     \rfoot[]{\thepage}
-% }
-%
-% % header
-% \fancyheadoffset{1cm}
-% \lhead{\nouppercase{\leftmark}}
-% \rhead{\nouppercase{\rightmark}}
-
-% https://golatex.de/viewtopic.php?t=18830
-\defbibenvironment{bibliography}
-  {\itemize}
-  {\enditemize}
-  {\item}
 
 % https://tex.stackexchange.com/questions/358292/creating-a-subcounter-to-a-counter-i-created
 \usepackage{chngcntr}
@@ -181,3 +154,6 @@
 
 % https://tex.stackexchange.com/questions/531/what-is-the-best-way-to-use-quotation-mark-glyphs
 \usepackage{csquotes}
+
+% https://texfaq.org/FAQ-twooptarg
+\usepackage{xargs}

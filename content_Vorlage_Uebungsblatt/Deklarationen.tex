@@ -1,3 +1,9 @@
+%!Tex Root = ../Vorlage_Uebungsblatt.tex
+% ./Packete.tex
+% ./Design.tex
+% Kapitel1
+% Kapitel2
+
 % ┌────────┐
 % │ Colors │
 % └────────┘
@@ -5,6 +11,18 @@
 % https://latexdraw.com/how-to-draw-venn-diagrams-in-latex/
 \definecolor{PrimaryColor}{HTML}{4D2875}
 \definecolor{SecondaryColor}{HTML}{DBD3E3}
+\colorlet{BoxColor}{gray!10!white}
+
+% ┌──────────┐
+% │ Listings │
+% └──────────┘
+
+\tcblistof[\chapter*]{theorem_list}{Definitionsverzeichnis}
+\addcontentsline{toc}{chapter}{Definitionsverzeichnis}
+% https://tex.stackexchange.com/questions/49155/how-can-i-list-items-created-with-the-float-package-in-the-toc
+\addcontentsline{toc}{chapter}{Grammatikverzeichnis}
+
+\numberwithin{codecaption}{chapter}
 
 % ┌──────────────┐
 % │ New Commands │
@@ -23,20 +41,15 @@
 
 % ignorespace: https://runebook.dev/de/docs/latex/_005cignorespaces-_0026-_005cignorespacesafterend
 % enspace: https://math-linux.com/latex-26/faq/latex-faq/article/latex-horizontal-space-qquad-hspace-thinspace-enspace
-\newcommand{\coloritem[1]}[]{%
-\@ifmtarg{#1}{\item[\textcolor{PrimaryColor}{\textbullet}]}%
-{\item[\textcolor{PrimaryColor}{\textbullet}] \colorbold{\textbf{#1:}}}\enspace\ignorespaces}
-
-\newcommand{\greyitem}{%
-\item[\textcolor{gray!90!black}{\textbullet}]\ignorespaces}
+\newcommand{\aitem[1]}[]{%
+\@ifmtarg{#1}{\item[\textcolor{SecondaryColor}{$\blacktriangleright$}]}%
+{\item[\textcolor{SecondaryColor}{\black}] \colorbold{\textbf{#1:}}}\enspace\ignorespaces}
+% \textbullet
 
 \makeatother
 
-% https://tex.stackexchange.com/questions/329990/how-do-i-change-the-color-of-itemize-bullet-specific-and-default
-\renewcommand{\labelitemi}{$\textcolor{PrimaryColor}{\bullet}$}
-% \renewcommand{\labelitemii}{$\textcolor{PrimaryColor}{\cdot}$}
-% \renewcommand{\labelitemiii}{$\textcolor{PrimaryColor}{\diamond}$}
-% \renewcommand{\labelitemiv}{$\textcolor{PrimaryColor}{\ast}$}
+\newcommand{\greyitem}{%
+\item[\textcolor{gray!90!black}{$\blacktriangleright$}]\ignorespaces}
 
 % Grammar
 % \newcommand{\removed}[0]{\rowstyle{\color{red}}}
@@ -59,23 +72,34 @@
 %   \setcounter{tocdepth}{#1}%
 % }
 
-% ┌─────────────────────┐
-% │ Repeating Sentences │
-% └─────────────────────┘
-
-\newcommanr{\repeatingsent}{Repeating sentence.}
-
 % ┌──────────────────┐
 % │ New Environments │
 % └──────────────────┘
 
 % https://github.com/IUCompilerCourse/Essentials-of-Compilation
-\newenvironment{transformation}{
+\newenvironmentx{transformation}[2][1=0.4, 2=0.4]{
   \newcommand{\compilesto}{%
-    \end{minipage}&$\Rightarrow$&\begin{minipage}{0.4\textwidth}\centering}
+    \end{minipage}&$\Rightarrow$&\begin{minipage}{#2\textwidth}\centering}
   \newcommand{\notequal}{%
-    \end{minipage}&$\ne$&\begin{minipage}{0.4\textwidth}\centering}
-  \begin{center}\begin{tabular}{ccc}\begin{minipage}{0.4\textwidth}\centering
+    \end{minipage}&$\ne$&\begin{minipage}{#2\textwidth}\centering}
+  \newcommand{\arrowx}[1]{%
+    \end{minipage}$\xRightarrow{##1}$\begin{minipage}{#2\linewidth}\centering}
+  \newcommand{\arrowxx}[2]{%
+    \end{minipage}$\xRightarrow[##2]{##1}$\begin{minipage}{#2\linewidth}\centering}
+  \begin{center}\begin{tabular}{ccc}\begin{minipage}{#1\textwidth}\centering
   }{%
   \end{minipage}\end{tabular}\end{center}%
 }
+
+% https://golatex.de/viewtopic.php?t=18830
+\defbibenvironment{bibliography}
+  {\itemize}
+  {\enditemize}
+  {\item}
+
+
+% ┌─────────────────────┐
+% │ Repeating Sentences │
+% └─────────────────────┘
+
+\newcommand{\repeatingsent}{Repeating sentence.}

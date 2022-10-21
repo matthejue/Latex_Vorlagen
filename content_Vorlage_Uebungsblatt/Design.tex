@@ -1,3 +1,108 @@
+%!Tex Root = ../Vorlage_Uebungsblatt.tex
+% ./Packete.tex
+% ./Deklarationen.tex
+% Kapitel1
+% Kapitel2
+
+% ┌─────────┐
+% │ Setings │
+% └─────────┘
+
+% https://tex.stackexchange.com/questions/329990/how-do-i-change-the-color-of-itemize-bullet-specific-and-default
+\renewcommand{\labelitemi}{$\textcolor{PrimaryColor}{\blacktriangleright}$}
+\renewcommand{\labelitemii}{$\textcolor{PrimaryColor}{\blacktriangleright}$}
+\renewcommand{\labelitemiii}{$\textcolor{PrimaryColor}{\blacktriangleright}$}
+\renewcommand{\labelitemiv}{$\textcolor{PrimaryColor}{\blacktriangleright}$}
+% \bullet, \cdot, \diamond, \ast
+
+% ------------------------------ Minted Settings ------------------------------
+
+% https://tex.stackexchange.com/questions/584071/configure-minted-style-in-latex-for-code-highlighting
+% https://pygments.org/docs/tokens/
+% https://pygments.org/docs/styledevelopment/#creating-own-styles
+% 'custom':  'custom::CustomStyle' in /usr/lib/python3.10/site-packages/pygments/styles/__init__.py
+% https://tex.stackexchange.com/questions/18083/how-to-add-custom-c-keywords-to-be-recognized-by-minted#comment930474_42392
+\usemintedstyle{custom}
+
+% https://tex.stackexchange.com/questions/345976/global-settings-for-minted
+\setminted{fontsize=\normalsize,breaklines,highlightcolor=SecondaryColor,autogobble,escapeinside=||,breakafter={_},breakbefore={(},breakaftersymbolpre={},breakaftersymbolpost={},breakbeforesymbolpre={},breakbeforesymbolpost={},breaksymbolsepleft=2mm,breaksymbolsepright=0mm,breakindent=0mm,breaksymbolindentleft=5mm,breaksymbolindentright=0mm,numbersep=2mm}
+
+
+\newenvironment{linenums}{
+  \setminted{linenos}
+}{}
+
+% https://tex.stackexchange.com/questions/7210/label-and-caption-without-float
+\DeclareCaptionType{codecaption}[Code][Codeverzeichnis]
+% https://tex.stackexchange.com/questions/449677/spaces-in-newenvironment
+\newenvironment{code}{\bigskip\captionsetup{type=codecaption}}{\medskip}
+
+% https://tex.stackexchange.com/questions/585582/inside-of-a-newtcbinputlisting-how-can-i-change-the-color-of-the-line-number-as
+% https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
+\renewcommand{\theFancyVerbLine}{\ttfamily\textcolor{white}{\normalsize{\arabic{FancyVerbLine}}}}
+
+% ┌────────────────────────────────────────┐
+% │ Boxes and everything connected with it │
+% └────────────────────────────────────────┘
+
+% https://tex.stackexchange.com/questions/538528/tcolorbox-newtcbtheorem-index-with-tcolorbox
+\newtcbtheorem[list inside={theorem_list},crefname={definition}{definitions}, number within=chapter]{Definition}{Definition}%
+{enhanced, breakable, arc=0mm,top=3mm,bottom=3mm, boxrule=0mm, borderline south={1mm}{0pt}{PrimaryColor}, title style={color=PrimaryColor},
+interior style={opacity=0.2, fill=PrimaryColor},
+frame style={color=white}, fonttitle=\bfseries, fontupper=\itshape,
+before upper=\setlength{\parskip}{1em},
+after title={\hfill\includegraphics[height=3mm]{./figures/note.png}}
+}{def}
+
+\DeclareTCBInputListing{\codebox}{ s o m }{listing file={#3},
+  enhanced,colframe=PrimaryColor,colback=BoxColor,IfBooleanTF={#1}{colframe=SecondaryColor}{colframe=PrimaryColor},fonttitle=\bfseries\normalsize,#2,listing only,halign title=center,drop fuzzy shadow,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,boxrule=0.5mm,listing engine=minted}
+% , sharpish corners
+
+% % https://tex.stackexchange.com/questions/585582/inside-of-a-newtcbinputlisting-how-can-i-change-the-color-of-the-line-number-as
+% % https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
+% https://tex.stackexchange.com/questions/132849/how-can-i-change-the-font-size-of-the-number-in-minted-environment
+\renewcommand{\theFancyVerbLine}{\ttfamily\textcolor{white}{\normalsize{\arabic{FancyVerbLine}}}}
+% \renewcommand{\theFancyVerbLine}{\sffamily \textcolor[rgb]{0.5,0.5,1.0}{\huge \oldstylenums{\arabic{FancyVerbLine}}}}
+
+\newtcbinputlisting{\numberedcodebox}[2][]{
+  listing file={#2}, enhanced, colframe=PrimaryColor,colback=BoxColor, fonttitle=\bfseries\normalsize, #1, listing only, halign title=center,drop fuzzy shadow,arc=1mm,boxrule=0.5mm,listing engine=minted,overlay={\begin{tcbclipinterior}\fill[PrimaryColor] (frame.south west) rectangle ([xshift=4mm]frame.north west);\end{tcbclipinterior}}
+}
+
+\DeclareTColorBox{codeframe}{ s o m }{
+  enhanced, halign title=center, fonttitle=\bfseries\normalsize, interior style={fill=white}, IfBooleanTF={#1}{frame style={color=PrimaryColor}}{frame style={color=PrimaryColor}}, title={#3}, #2,drop fuzzy shadow,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,boxrule=0.5mm,listing engine=minted,minted style=colorful}
+
+\newtcolorbox{file}[1][]{enhanced, hbox, notitle, interior style={fill=SecondaryColor}, frame empty, halign=center, fontupper=\color{white}\normalsize, #1,drop fuzzy shadow,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,boxrule=0.5mm,listing engine=minted,minted style=colorful}
+
+\newtcblisting{terminal}{
+enhanced,colframe=PrimaryColor,colback=BoxColor,hbox,listing only,halign title=center,minted language=text,drop fuzzy shadow,arc=1mm,bottom=1mm,top=1mm,left=1mm,right=1mm,boxrule=0.5mm,listing engine=minted,minted style=colorful,minted options={}}
+
+% % https://tex.stackexchange.com/questions/593218/nested-inline-math-for-new-command-with-argument
+\newcommand{\prompt}{\textcolor{PrimaryColor}{\setBold >\;\ignorespaces}}
+% % https://tex.stackexchange.com/questions/593218/nested-inline-math-for-new-command-with-argument
+\newcommand{\customprompt}{\textnormal\bfseries\textcolor{PrimaryColor}{S}\textcolor{gray!90!black}{he}\textcolor{SecondaryColor}{ll}\textcolor{PrimaryColor}{>}\;\ignorespaces}
+
+\DeclareTotalTCBox{\inlinebox}{ s v }
+{verbatim,colback=SecondaryColorDimmed,colframe=SecondaryColor}
+{\IfBooleanTF{#1}%
+{\textcolor{SecondaryColor}{\setBold >\enspace\ignorespaces}#2}%
+{#2}}
+
+\DeclareTotalTCBox{\key}{ m }
+{verbatim,colback=SecondaryColorDimmed,colframe=SecondaryColor}
+{$\mathtt{#1}$}
+
+\newtcolorbox{Sidenote}{enhanced,breakable,drop fuzzy shadow,sharpish corners, notitle,arc=0mm,left=3mm,right=3mm,boxrule=1mm, borderline vertical={1mm}{0pt}{PrimaryColor},title=Sidenote,attach boxed title to top text left={yshift=0mm},
+interior style={fill=BoxColor},
+frame style={color=BoxColor},
+% https://tex.stackexchange.com/questions/459870/paragraph-breaks-inside-tcolorbox, maybe also parbox=false
+boxed title style={arc=0mm,skin=enhancedfirst jigsaw,frame empty,colback=PrimaryColor,boxrule=0mm,bottom=-0.4mm},
+after title={\hspace{0.2cm}\includegraphics[height=3mm]{./figures/lupe.png}}
+}
+% before upper=\setlength{\parskip}{1em},
+% fonttitle=\bfseries
+
+\numberwithin{equation}{section}
+
 % ┌───────────────────┐
 % │ Header and Footer │
 % └───────────────────┘
@@ -50,19 +155,11 @@
 % https://tex.stackexchange.com/questions/32160/new-line-after-paragraph
 \newcommand{\newlineparagraph}[1]{\paragraph{#1}\mbox{}\\\vspace{-0.5cm}}
 
-% ┌────────────────────────────────────────┐
-% │ Boxes and everything connected with it │
-% └────────────────────────────────────────┘
-
-% https://tex.stackexchange.com/questions/7210/label-and-caption-without-float
-\DeclareCaptionType{codecaption}[Code][Codeverzeichnis]
-% https://tex.stackexchange.com/questions/449677/spaces-in-newenvironment
-\newenvironment{code}{\bigskip\captionsetup{type=codecaption}}{\medskip}
-
-\newcommand{\prompt}{\textcolor{PrimaryColor}{\setBold >\enspace\ignorespaces}}
-% https://tex.stackexchange.com/questions/593218/nested-inline-math-for-new-command-with-argument
-\newcommand{\picocprompt}{\textnormal\bfseries\textcolor{PrimaryColor}{P}\textcolor{gray!90!black}{ico}\textcolor{PrimaryColor}{C}\textcolor{white}{>}}
-
-% https://tex.stackexchange.com/questions/585582/inside-of-a-newtcbinputlisting-how-can-i-change-the-color-of-the-line-number-as
-% https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
-\renewcommand{\theFancyVerbLine}{\ttfamily\textcolor{white}{\small{\arabic{FancyVerbLine}}}}
+\newcommand{\newplain}{
+  \fancypagestyle{plain}{%
+      \fancyhf{}%
+      \fancyfootoffset{1cm}
+      \renewcommand{\headrulewidth}{0mm}%
+      \fancyfoot[R]{\thepage}
+  }
+}
