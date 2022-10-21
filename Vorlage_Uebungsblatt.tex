@@ -1,0 +1,50 @@
+\input{./content_Vorlage_Uebungsblatt/Packete}
+\input{./content_Vorlage_Uebungsblatt/Design}
+\input{./content_Vorlage_Uebungsblatt/Deklarationen}
+
+\includeonly{
+  ./content_Vorlage_Uebungsblatt/Kapitel1,
+  ./content_Vorlage_Uebungsblatt/Kapitel2,
+}
+
+\def\hide{0}
+
+\begin{document}
+
+\begin{withoutheadline}
+  \begin{withoutfootline}
+    \begin{frame}
+      \titlepagesecond
+    \end{frame}
+  \end{withoutfootline}
+
+  \begin{frame}{Gliederung}
+    \tableofcontents[hideallsubsections]
+  \end{frame}
+\end{withoutheadline}
+
+\include{./content_Vorlage_Uebungsblatt/Kapitel1}
+\include{./content_Vorlage_Uebungsblatt/Kapitel2}
+
+\section{Literatur}
+
+\begin{frame}{Bücher}
+  \printbibliography[type=book,heading=subbibliography,title={Bücher}]
+\end{frame}
+
+\begin{frame}{Artikel}
+  \printbibliography[type=article,heading=subbibliography,title={Artikel}]
+\end{frame}
+
+\begin{frame}{Vorlesungen}
+  \printbibliography[type=unpublished,heading=subbibliography,title={Vorlesungen}]
+\end{frame}
+
+\begin{frame}{Online}
+  \printbibliography[type=online,heading=subbibliography,title={Online}]
+\end{frame}
+
+\begin{frame}{Sonstiges}
+  \printbibliography[nottype=book, nottype=article, nottype=online, nottype=unpublished,heading=subbibliography,keyword=wikikeyword,title={Sonstige Quellen}]
+\end{frame}
+\end{document}

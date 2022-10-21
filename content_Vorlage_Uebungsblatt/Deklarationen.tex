@@ -1,0 +1,81 @@
+% ┌────────┐
+% │ Colors │
+% └────────┘
+
+% https://latexdraw.com/how-to-draw-venn-diagrams-in-latex/
+\definecolor{PrimaryColor}{HTML}{4D2875}
+\definecolor{SecondaryColor}{HTML}{DBD3E3}
+
+% ┌──────────────┐
+% │ New Commands │
+% └──────────────┘
+
+\newcommand{\smalltt}[1]{{\small\texttt{#1}}}
+% https://tex.stackexchange.com/questions/219445/line-break-in-texttt
+\newcommand{\seqtt}[1]{{\small\texttt{\seqsplit{#1}}}}
+
+% bold with color
+\newcommand\colorbold[1]{\textcolor{PrimaryColor}{\textbf{#1}}}
+\newcommand\acolorbold[1]{\textcolor{SecondaryColor}{\textbf{#1}}}
+
+% https://tex.stackexchange.com/questions/8351/what-do-makeatletter-and-makeatother-do
+\makeatletter
+
+% ignorespace: https://runebook.dev/de/docs/latex/_005cignorespaces-_0026-_005cignorespacesafterend
+% enspace: https://math-linux.com/latex-26/faq/latex-faq/article/latex-horizontal-space-qquad-hspace-thinspace-enspace
+\newcommand{\coloritem[1]}[]{%
+\@ifmtarg{#1}{\item[\textcolor{PrimaryColor}{\textbullet}]}%
+{\item[\textcolor{PrimaryColor}{\textbullet}] \colorbold{\textbf{#1:}}}\enspace\ignorespaces}
+
+\newcommand{\greyitem}{%
+\item[\textcolor{gray!90!black}{\textbullet}]\ignorespaces}
+
+\makeatother
+
+% https://tex.stackexchange.com/questions/329990/how-do-i-change-the-color-of-itemize-bullet-specific-and-default
+\renewcommand{\labelitemi}{$\textcolor{PrimaryColor}{\bullet}$}
+% \renewcommand{\labelitemii}{$\textcolor{PrimaryColor}{\cdot}$}
+% \renewcommand{\labelitemiii}{$\textcolor{PrimaryColor}{\diamond}$}
+% \renewcommand{\labelitemiv}{$\textcolor{PrimaryColor}{\ast}$}
+
+% Grammar
+% \newcommand{\removed}[0]{\rowstyle{\color{red}}}
+
+% https://framagit.org/Bromind/LaTeX-packages/-/blob/master/formal-grammar/formal-grammar.dtx
+% \makeatletter
+% \renewcommand{\firstcase}[3]{\(#1\) & \(\formal@Coloneqq\) & \(#2\) & {\itshape \color{gray!90!black} #3}\\}
+% \makeatother
+%
+% \renewcommand{\downplay}[0]{\rowstyle{\color{gray!90!black}}}
+
+% https://texblog.net/latex-archive/uncategorized/prevent-floating-image-figure-table/
+% \newcommand\captionof[1]{\def\@captype{#1}\caption}
+
+\newcommand{\footnoteurl}[1]{\href{#1}{Link}\footnote{\url{#1}.}}
+
+% https://tex.stackexchange.com/questions/395856/switching-tocdepth-in-the-middle-of-a-document
+% \newcommand{\changelocaltocdepth}[1]{%
+%   \addtocontents{toc}{\protect\setcounter{tocdepth}{#1}}%
+%   \setcounter{tocdepth}{#1}%
+% }
+
+% ┌─────────────────────┐
+% │ Repeating Sentences │
+% └─────────────────────┘
+
+\newcommanr{\repeatingsent}{Repeating sentence.}
+
+% ┌──────────────────┐
+% │ New Environments │
+% └──────────────────┘
+
+% https://github.com/IUCompilerCourse/Essentials-of-Compilation
+\newenvironment{transformation}{
+  \newcommand{\compilesto}{%
+    \end{minipage}&$\Rightarrow$&\begin{minipage}{0.4\textwidth}\centering}
+  \newcommand{\notequal}{%
+    \end{minipage}&$\ne$&\begin{minipage}{0.4\textwidth}\centering}
+  \begin{center}\begin{tabular}{ccc}\begin{minipage}{0.4\textwidth}\centering
+  }{%
+  \end{minipage}\end{tabular}\end{center}%
+}

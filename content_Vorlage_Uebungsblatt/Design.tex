@@ -1,0 +1,68 @@
+% ┌───────────────────┐
+% │ Header and Footer │
+% └───────────────────┘
+
+\fancypagestyle{default}{%
+  \fancyhf{}
+  \fancyfootoffset{1cm}
+  \fancyheadoffset{1cm}
+  \fancyhead[R]{\nouppercase{\rightmark}}
+  \fancyhead[L]{\nouppercase{\leftmark}}
+    \renewcommand{\headrulewidth}{0.2mm}
+  \fancyfoot[R]{\thepage}
+}
+
+\fancypagestyle{plain}{%
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0mm}
+}
+
+\fancypagestyle{bib}{%
+    \fancyhf{}
+    \fancyfootoffset{1cm}
+    \renewcommand{\headrulewidth}{0mm}
+    \fancyfoot[R]{\thepage}
+}
+
+% ┌──────────────────────────────────────────────┐
+% │ Space after and before Section, Chapter etc. │
+% └──────────────────────────────────────────────┘
+
+% \titlespacing*{\section}
+\titlespacing*{\section}{0cm}{*4}{*4}
+\titlespacing*{\subsection}{0cm}{*3}{*3}
+\titlespacing*{\subsubsection}{0cm}{*2}{*2}
+
+% https://tex.stackexchange.com/questions/139366/chapter-header-with-super-huge-numbers
+\usepackage{fix-cm}
+\newcommand{\hsp}{\hspace{0pt}}
+\titleformat{\chapter}[hang]{\bfseries}{\fontsize{100}{0}\selectfont \textcolor{PrimaryColor}\thechapter\hsp}{0.5cm}{\Huge}[]
+
+% https://tex.stackexchange.com/a/40001
+\titlespacing*{\chapter}{0cm}{*0}{*4}
+
+% https://stackoverflow.com/questions/2854299/getting-subsection-to-list-in-table-of-contents-in-latex
+\setcounter{tocdepth}{4}
+
+% https://tex.stackexchange.com/questions/186981/is-there-a-subsubsubsection-command
+% https://tex.stackexchange.com/questions/130795/how-can-i-number-sections-below-subsection-in-latex
+\setcounter{secnumdepth}{5}
+% https://tex.stackexchange.com/questions/32160/new-line-after-paragraph
+\newcommand{\newlineparagraph}[1]{\paragraph{#1}\mbox{}\\\vspace{-0.5cm}}
+
+% ┌────────────────────────────────────────┐
+% │ Boxes and everything connected with it │
+% └────────────────────────────────────────┘
+
+% https://tex.stackexchange.com/questions/7210/label-and-caption-without-float
+\DeclareCaptionType{codecaption}[Code][Codeverzeichnis]
+% https://tex.stackexchange.com/questions/449677/spaces-in-newenvironment
+\newenvironment{code}{\bigskip\captionsetup{type=codecaption}}{\medskip}
+
+\newcommand{\prompt}{\textcolor{PrimaryColor}{\setBold >\enspace\ignorespaces}}
+% https://tex.stackexchange.com/questions/593218/nested-inline-math-for-new-command-with-argument
+\newcommand{\picocprompt}{\textnormal\bfseries\textcolor{PrimaryColor}{P}\textcolor{gray!90!black}{ico}\textcolor{PrimaryColor}{C}\textcolor{white}{>}}
+
+% https://tex.stackexchange.com/questions/585582/inside-of-a-newtcbinputlisting-how-can-i-change-the-color-of-the-line-number-as
+% https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX
+\renewcommand{\theFancyVerbLine}{\ttfamily\textcolor{white}{\small{\arabic{FancyVerbLine}}}}

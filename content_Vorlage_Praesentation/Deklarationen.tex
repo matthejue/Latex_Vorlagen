@@ -77,7 +77,6 @@ after title={\hspace{0.2cm}\includegraphics[height=3mm]{./figures/lupe.png}}
 % before upper=\setlength{\parskip}{1em},
 % fonttitle=\bfseries
 
-
 \numberwithin{equation}{section}
 
 % ┌───────────────┐
@@ -138,3 +137,20 @@ after title={\hspace{0.2cm}\includegraphics[height=3mm]{./figures/lupe.png}}
 % https://tex.stackexchange.com/questions/188379/theorem-numbering-in-beamer
 % Nummerierung der Theorem und Berücksichtigung der Sections
 \renewcommand\thetheorem{\arabic{section}.\arabic{theorem}}
+
+% ┌──────────────────┐
+% │ New Environments │
+% └──────────────────┘
+
+
+\newenvironmentx{transformation}[3][1=0.3, 2=0.2, 3=0.4]{
+  \newcommand{\compilesto}{%
+    \end{column}\begin{column}{#2\linewidth}\centering$\Rightarrow$\end{column}\begin{column}{#3\linewidth}\centering}
+  \newcommand{\arrowx}[1]{%
+    \end{column}\begin{column}{#2\linewidth}\centering$\xRightarrow{##1}$\end{column}\begin{column}{#3\linewidth}\centering}
+  \newcommand{\arrowxx}[2]{%
+    \end{column}\begin{column}{#2\linewidth}\centering$\xRightarrow[##2]{##1}$\end{column}\begin{column}{#3\linewidth}\centering}
+  \begin{columns}\begin{column}{#1\linewidth}\centering
+  }{%
+  \end{column}\end{columns}%
+}

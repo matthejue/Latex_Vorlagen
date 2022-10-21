@@ -1,0 +1,183 @@
+%!Tex Root = ../Main.tex
+% ./Titlepage.tex
+% ./Motivation.tex
+% ./Einführung.tex
+% ./Implementierung1_Tables_DT_AST.tex,
+% ./Implementierung2_Pntr_Array.tex,
+% ./Implementierung3_Struct_Derived.tex,
+% ./Implementierung4_Fun.tex,
+% ./Implementierung5_Fehlermeldungen.tex,
+% ./Ergebnisse_und_Ausblick.tex
+% ./Appendix.tex
+
+% https://tex.stackexchange.com/questions/83101/option-clash-for-package-xcolor
+% [table]
+\documentclass{report}
+\usepackage[margin=1.5cm, headheight=12.5pt]{geometry}
+\usepackage[ngerman]{babel}
+\usepackage{lipsum}
+\usepackage[parfill, ]{parskip}
+% https://latexref.xyz/bs-par.html
+\setlength{\parskip}{0.4cm} % space between paragraphs
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=PrimaryColor]{hyperref} %hidelinks
+% \usepackage{listings}
+
+% https://tex.stackexchange.com/questions/48509/insert-list-of-figures-in-the-table-of-contents
+\usepackage[nottoc]{tocbibind}
+
+% https://tex.stackexchange.com/questions/169098/dotted-line-instead-of-hline-in-table-environment
+% \usepackage{arydshln}
+
+% colorbox stuff
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary {arrows.meta,positioning}
+\usetikzlibrary{graphs}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadings}
+\tcbuselibrary{theorems}
+\tcbuselibrary{listings}
+% https://tex.stackexchange.com/questions/550052/command-parboxrestore-has-changed
+\tcbuselibrary{minted}
+\tcbset{listing engine=minted}
+% \tcbuselibrary{raster}
+
+% https://tex.stackexchange.com/questions/345976/global-settings-for-minted
+\setminted{fontsize=\small,breaklines,autogobble,linenos,numbersep=1.25mm, highlightcolor=SecondaryColor,escapeinside=||}
+
+\usepackage{cleveref}
+
+\usepackage[style=authortitle]{biblatex}
+\addbibresource{./My Library/My Library.bib}
+\usepackage{pdfpages}
+\usepackage{booktabs} % for table rules
+% \usepackage{tabulary}
+% https://tex.stackexchange.com/questions/395554/command-rowcolors-from-colortbl-does-not-work-as-expected
+\usepackage{nicematrix}
+% \usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+
+% https://tex.stackexchange.com/questions/9425/how-to-fix-footnote-position-at-the-bottom-of-the-page
+\usepackage[bottom, flushmargin]{footmisc}
+
+% https://tex.stackexchange.com/a/32212
+\interfootnotelinepenalty=10000
+
+% https://tex.stackexchange.com/questions/8625/force-figure-placement-in-text
+\usepackage{float}
+
+% https://tex.stackexchange.com/questions/108684/spacing-before-and-after-section-titles
+% spacing after section
+\usepackage{titlesec}
+
+% https://latexdraw.com/how-to-draw-venn-diagrams-in-latex/
+\usepackage{xcolor}
+
+% https://tex.stackexchange.com/questions/219445/line-break-in-texttt
+\usepackage{seqsplit}
+
+% https://tex.stackexchange.com/questions/153167/how-to-set-page-number-at-right-footer
+% footer
+\usepackage{fancyhdr}
+% \fancyhf{}
+% \fancyfootoffset{1cm}
+% \rfoot[]{\thepage}
+%
+% \fancypagestyle{plain}{%
+%   % on first chapter pages no rule
+%     \renewcommand{\headrulewidth}{0mm}%
+%     \fancyhf{}%
+%     \rfoot[]{\thepage}
+% }
+%
+% % header
+% \fancyheadoffset{1cm}
+% \lhead{\nouppercase{\leftmark}}
+% \rhead{\nouppercase{\rightmark}}
+
+% https://golatex.de/viewtopic.php?t=18830
+\defbibenvironment{bibliography}
+  {\itemize}
+  {\enditemize}
+  {\item}
+
+% https://tex.stackexchange.com/questions/358292/creating-a-subcounter-to-a-counter-i-created
+\usepackage{chngcntr}
+
+% https://tex.stackexchange.com/questions/18870/defining-an-new-itemize-like-environment-where-itemfoo-passes-foo-to-a-macro
+\usepackage{ifmtarg}
+
+% https://stackoverflow.com/questions/1061112/eliminate-space-before-beginitemize
+\usepackage{enumitem}
+
+% https://tex.stackexchange.com/a/263470
+\usepackage{microtype}
+
+% https://tex.stackexchange.com/questions/165178/nameref-hyperref-evaluating-counter-instead-of-section-name
+\usepackage{nameref}
+\GetTitleStringSetup{expand}
+
+% https://stackoverflow.com/questions/1078370/subfigs-of-a-figure-on-multiple-pages
+\usepackage{subfig}
+
+% https://tex.stackexchange.com/questions/369421/how-to-have-a-figure-going-over-several-pages
+% TODO: set hypcap = true when compiling for the last time
+% https://tex.stackexchange.com/questions/132611/change-color-of-figure-caption-text
+\usepackage[labelfont={color=PrimaryColor, bf}, textfont={it}]{caption}
+% hypcap=false
+
+% https://texblog.net/latex-archive/uncategorized/prevent-floating-image-figure-table/
+% \usepackage{capt-of}
+
+% https://tex.stackexchange.com/questions/7627/how-to-reference-paragraph
+% \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0mm}{}[:]
+
+\usepackage{formal-grammar}
+
+% https://tex.stackexchange.com/questions/547950/highlight-labeled-lines-of-code-with-minted
+% \usepackage{refcount}
+
+\numberwithin{equation}{section}
+
+% https://tex.stackexchange.com/questions/26637/how-do-you-get-mathbb1-to-work-characteristic-function-of-a-set
+% \usepackage{bbm}
+% \usepackage{newtxmath}
+
+\usepackage{listings}
+
+% https://tex.stackexchange.com/questions/27843/level-of-boldness-changeable
+\usepackage[bold=1]{xfakebold}
+
+% https://www.namsu.de/Extra/befehle/Cases.html
+\usepackage{mathtools}
+
+\usepackage{breqn}
+
+% https://tex.stackexchange.com/questions/479632/newcommand-combine-optional-star-and-optional-parameter
+% \usepackage{xparse}
+\tcbuselibrary{xparse}
+
+% https://tex.stackexchange.com/questions/26637/how-do-you-get-mathbb1-to-work-characteristic-function-of-a-set
+\usepackage{bbm}
+
+\usepackage{tikzsymbols}
+
+% https://stackoverflow.com/questions/2888817/footnotes-for-tables-in-latex
+% \usepackage{tablefootnote}
+
+% newfloat package
+\SetupFloatingEnvironment{floatgrammar}{name=Grammatik}
+
+\usepackage[german]{algorithm2e}
+
+% https://tex.stackexchange.com/questions/237974/hide-section-numbering-but-keep-labeling
+\usepackage[usetoc]{titleref}
+
+% https://tex.stackexchange.com/questions/531/what-is-the-best-way-to-use-quotation-mark-glyphs
+\usepackage{csquotes}
